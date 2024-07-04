@@ -1,9 +1,10 @@
 <script setup>
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
-  import { loadArticles, loadAuthors } from './LoadArticles.js';
+  import { loadArticles } from './LoadArticles.js';
   import { ref, onMounted } from 'vue';
   import ArticleList from '@/components/ArticleList/ArticleList.vue';
   import ArticleListItem from '@/components/ArticleList/ArticleListItem.vue';
+  import { authors } from '@/assets/authors.json';
   import cache from '@/util/cache.js';
   import exists from '@/util/exists.js';
 
@@ -18,17 +19,16 @@
   // 1 = dense
 
   const articles = ref([]);
-  const authors = ref([]);
 
   function setDensity(density) {
     cardType.value = density;
     cache.set('displayType', density);
   }
 
-  function getAuthorNameById(id, givenAuthors) {
-    for (let i = 0; i < givenAuthors.length; i++) {
-      if (givenAuthors[i].id == id)
-        return givenAuthors[i].name
+  function getAuthorNameById(id) {
+    for (let i = 0; i < authors.length; i++) {
+      if (authors[i].id == id)
+        return authors[i].name
     }
 
     return `author #${id} not found`;
@@ -37,9 +37,6 @@
   onMounted(async ()=>{
     loadArticles(6).then(loadedArticles => {
       articles.value = loadedArticles;
-    });
-    loadAuthors().then(loadedAuthors => {
-      authors.value = loadedAuthors;
     });
   });
 </script>
@@ -84,7 +81,7 @@
             :title="article.title"
             :imgUrl="article.imgUrl"
             :authorId="article.author"
-            :author="getAuthorNameById(article.author, authors)"
+            :author="getAuthorNameById(article.author)"
             :date="article.date"
             :description="article.content.slice(0,220)"
           />
