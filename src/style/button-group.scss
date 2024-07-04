@@ -1,0 +1,33 @@
+.button-group {
+  display: inline;
+
+  button, .button {
+    &:not(:first-of-type):not(:last-of-type) {
+      border-radius: 0;
+    }
+
+    &:first-of-type {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-of-type {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &:not(:last-of-type) {
+      border-right-width: 0;
+    }
+
+    float: left;
+  }
+
+  &.button-group-full {
+    display: flex;
+
+    & > button, .button {
+      flex: 1;
+    }
+  }
+}

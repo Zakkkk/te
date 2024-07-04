@@ -1,0 +1,19 @@
+{
+  "authors": [
+    {
+      "id": 0,
+      "name": "Zak",
+      "biography": "This is Zak's biography"
+    },
+    {
+      "id": 1,
+      "name": "Gabe",
+      "biography":"This is Gabe's biography"
+    },
+    {
+      "id": 2,
+      "name": "Matias",
+      "biography": "This is Matias's biography"
+    }
+  ]
+}

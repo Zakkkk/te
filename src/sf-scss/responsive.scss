@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+@mixin responsive($i) {
+    @if $i == 3 {
+        @media (min-width: $break-point-2) { @content; }
+    } @else if $i == 2 {
+        @media (min-width: $break-point-1) {
+            @media (max-width: $break-point-2) {
+                @content;
+            }
+        }
+    } @else if $i == 1 {
+        @media (max-width: $break-point-1) { @content; }
+    }
+}

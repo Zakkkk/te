@@ -1,0 +1,15 @@
+input {
+  width: 100%;
+  outline: 0;
+  color: var(--color-fg);
+  padding: 10px;
+  border-radius: 2px;
+  border: 2px solid $lgrey-3;
+  transition: all $sf-transition;
+  display: block;
+
+  &:focus {
+    transition: all $sf-transition;
+    border-color: var(--color-primary);
+  }
+}

@@ -1,0 +1,10 @@
+:root {
+  --color-bg: #fcfcfc;
+  --color-fg: #111;
+  --color-primary: #{$indigo};
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}

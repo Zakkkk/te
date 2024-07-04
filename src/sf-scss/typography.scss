@@ -1,0 +1,40 @@
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-weight: 500;
+    margin: 0;
+}
+
+h1 { font-size: calc(4.0 * (12px + .33vw)) }
+h2 { font-size: calc(3.0 * (12px + .33vw)) }
+h3 { font-size: calc(2.3 * (12px + .33vw)) }
+h4 { font-size: calc(2.1 * (12px + .25vw)) }
+h5 { font-size: calc(1.9 * (12px + .25vw)) }
+h6 { font-size: calc(1.7 * (12px + .25vw)) }
+
+h1, h2, h3 {
+    font-family:var(--sf-font-serif);
+    line-height: 1.4;
+}
+
+.sf-font-serif, [fserif] {
+    font-family:var(--sf-font-serif);
+}
+
+.sf-font-sans, [fsans] {
+    font-family: var(--sf-font-sans);
+}
+
+.sf-font-mono, [fmono] {
+    font-family: var(--sf-font-mono);
+}
+
+body {
+    font-family: var(--sf-font-sans);
+}
+
+[bold] {
+    font-weight: 700;
+}

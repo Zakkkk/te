@@ -1,0 +1,60 @@
+.sf-grid {
+
+    padding: 0;
+    margin: 0;
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            width: percentage($i/12);
+        }
+    }
+
+    [class*='col-'] {
+        float: left;
+        
+        @include responsive (3) {
+            padding-right: 25px;
+        }
+        
+        @include responsive (2) {
+            padding-right: 16px;
+        }
+        
+        &:last-of-type {
+            padding-right: 0;
+        }
+        
+       @include responsive (1) {
+            width: 100%;
+            padding-right: 0;
+            
+            &:not(:last-of-type) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .col-12, .sf-grid-end-item {
+        padding-right: 0;
+    }
+
+    &.sf-grid-maximise-on-2 {
+        [class*='col-'] {
+            @include responsive (2) {
+                width: 100%;
+                
+                padding-right: 0;
+                
+                &:not(:last-of-type) {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
