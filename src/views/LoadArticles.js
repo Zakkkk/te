@@ -1,9 +1,18 @@
 import yaml, { load } from 'js-yaml';
 import axios from 'axios';
 
-async function loadArticleById(id) {
-  const response = await axios.get(`/data/articles/${id}.yml`);
-  return yaml.load(response.data);
+async function loadArticleById(id, articleNotFound) {
+  const listResponse = await axios.get(`/data/articles/list.json`);
+  const names = await listResponse.data.names;
+
+  // console.log(`names: ${names}, names.includes(${id}) = ${names.includes(id)}`)
+  if (names.includes(parseInt(id))) {
+    const articleResponse = await axios.get(`/data/articles/${id}.yml`);
+
+    return yaml.load(articleResponse.data);
+  } else {
+    articleNotFound();
+  }
 }
 
 async function loadAuthors() {

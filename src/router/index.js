@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '@/views/HomeView.vue';
 // import ArticleView from '../views/ArticleView.vue'
-import SubmitView from '@/views/SubmitView.vue'
-import ConstitutionView from '@/views/ConstitutionView.vue'
-import MissionView from '@/views/MissionView.vue'
+import SubmitView from '@/views/SubmitView.vue';
+import ConstitutionView from '@/views/ConstitutionView.vue';
+import MissionView from '@/views/MissionView.vue';
+import ArticleNotFoundView from '@/views/ArticleNotFoundView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,16 @@ const router = createRouter({
       path: '/articles/:articleId',
       name: 'article',
       component: () => import('@/views/SingleArticleView.vue')
+    },
+    {
+      path: '/articles/notfound',
+      name: 'notfound',
+      component: ArticleNotFoundView
+    },
+    {
+      path: '/author/:authorId',
+      name: 'author',
+      component: () => import('@/views/HomeView.vue')
     },
     {
       path: '/submit',

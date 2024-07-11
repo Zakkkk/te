@@ -6,14 +6,29 @@
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
   
   import { loadArticleById, loadAuthors } from './LoadArticles.js';
+  import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
+  import { marked} from 'marked';
+  import customHeadingId from "marked-custom-heading-id";
+
   import { ref, onMounted } from 'vue';
-  import { useRoute } from "vue-router";
+  import { useRoute, useRouter } from "vue-router";
+  import { RouterLink } from 'vue-router';
 
-  const route = useRoute()
+  const route = useRoute();
+  const router = useRouter();
+  const customRenderer = new marked.Renderer();
 
-  const article = ref({});
-  const author = ref({});
+  const article = ref({
+    content: 'loading...',
+    date: 0
+  });
+  const author = ref({
+    name: "loading author name...",
+    id: 0,
+  });
+  const headings = ref([]);
+  // each heading object will include an id and a title
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -24,10 +39,27 @@
     console.log(`unmatched author: id ${id}`)
   }
 
+  customRenderer.heading = ({ text, depth }) => {
+    const tagName = `h${depth + (depth!=6)}`;
+    return `<${tagName}>${text}</${tagName}>`;
+  };
+
+  marked.setOptions({
+    renderer: customRenderer,
+    sanitize: true, // Ensure no unsafe HTML is rendered
+    highlight: false // Disable code block highlighting
+  });
+
+  marked.use(customHeadingId());
+
   onMounted(async () => {
-    loadArticleById(route.params.articleId).then(loadedArticle => {
+    function articleNotFound() {
+      router.push('/articles/notfound');
+    }
+
+    loadArticleById(route.params.articleId, articleNotFound).then(loadedArticle => {
       article.value = loadedArticle;
-      author.value = matchAuthorFromId(article.value.author)
+      author.value = matchAuthorFromId(article.value.author);
     });
   });
 
@@ -44,7 +76,7 @@
     return `${year}-${month}-${day}`;
   }
 
-  function getFormattedDateFromTimestamp(timestamp) {
+  function getFormattedDateFromTime(timestamp) {
     const date = new Date(timestamp);
 
     const year = date.getFullYear();
@@ -67,7 +99,16 @@
         daySuffix = "th";
     }
 
-    return `${day}${daySuffix} ${month} ${year}`;
+    return `${day}${daySuffix} ${month}, ${year}`;
+  }
+
+  function getReadLengthText(content) {
+    if (!exists(content))
+      return "";
+
+    const articleLength = Math.ceil(content.split(' ').length/180);
+
+    return `${articleLength} ${articleLength == 1 ? " minute" : " minutes"}`;
   }
 </script>
 
@@ -76,7 +117,7 @@
 
   h1.article-title {
     font-size: 40px;
-    @include responsive(2) { font-size: calc(1.3vw + 25px); }
+    @include responsive(2) { font-size: calc(1); } // need to calculate more
     @include responsive(1) { font-size: 29px; }
 
     margin-bottom: 16px;
@@ -84,10 +125,38 @@
 
   h4.article-hook {
     font-size: 19px;
+
+    margin-bottom: 25px;
   }
 
   .meta-wrapper {
-    
+    margin-bottom: 25px;
+    display: flex;
+    column-gap: 5px;
+    font-size: 0.95rem;
+
+    > * {
+      display: inline;
+    }
+
+    a {
+      color: var(--color-fg);
+    }
+
+    .article-readlength {
+      display: inline-flex;
+      align-items: center;
+      column-gap: 5px;
+
+      .material-symbols-outlined {
+        font-size: 1.3em;
+      }
+    }
+  }
+
+  .point-sep {
+    user-select: none;
+    padding: 0 2px;
   }
 </style>
 
@@ -98,18 +167,29 @@
     <h4 class="article-hook">{{ article.hook }}</h4>
 
     <div class="meta-wrapper">
-      <address>{{ author.name }}</address>
+      <span>by</span>
+      
+      <address bold-semi><RouterLink :to="`/author/${author.id}`">{{ author.name }}</RouterLink></address>
+
+      <span class="point-sep">&#8212;</span>
+
       <time
-        :timestamp="getCurrentDateFormatted(article.date)"
-        >{{ getFormattedDateFromTimestamp(article.date) }}</time>
+        :timestamp="getCurrentDateFormatted(article.date)" >
+        {{ getFormattedDateFromTime(article.date) }}
+      </time>
+
+      <span class="point-sep">&#8212;</span>
+
+      <span class="article-readlength">
+        <span class="material-symbols-outlined">schedule</span>
+        <span>{{ getReadLengthText(article.content) }}</span>
+      </span>
     </div>
 
     <ArticleWrapperImage :imgUrl="article.imgUrl" />
 
     <br>
 
-    <SimpleContentWrapper>
-      <p>{{ article.content }}</p>
-    </SimpleContentWrapper>
+    <SimpleContentWrapper v-html="marked(article.content)" />
   </ArticleWrapperOuter>
 </template>
