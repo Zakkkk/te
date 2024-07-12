@@ -1,4 +1,4 @@
-import yaml, { load } from 'js-yaml';
+import yaml from 'js-yaml';
 import axios from 'axios';
 
 async function loadArticleById(id, articleNotFound) {
@@ -13,11 +13,6 @@ async function loadArticleById(id, articleNotFound) {
   } else {
     articleNotFound();
   }
-}
-
-async function loadAuthors() {
-  const response = await axios.get(`/data/authors.json`);
-  return response.data;
 }
 
 async function loadArticles(amount) {
@@ -41,6 +36,5 @@ async function loadArticlesByAuthorId(id, amount) {
 export {
   loadArticleById,
   loadArticles,
-  loadAuthors,
   loadArticlesByAuthorId
 };

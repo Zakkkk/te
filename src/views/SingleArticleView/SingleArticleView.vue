@@ -1,11 +1,15 @@
 <script setup>
+  import './style.scss';
+
   import ArticleWrapperOuter from '@/components/ArticleWrapper/ArticleWrapperOuter.vue';
-  import ArticleWrapperInner from '@/components/ArticleWrapper/ArticleWrapperInner.vue';
   import ArticleWrapperImage from '@/components/ArticleWrapper/ArticleWrapperImage.vue'
   
-  import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
-  
-  import { loadArticleById, loadAuthors } from './LoadArticles.js';
+  import Dropdown from '@/components/Dropdown/Dropdown.vue'; // Adjust the path as needed
+  import DropdownActivator from '@/components/Dropdown/DropdownActivator.vue';
+  import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
+  import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
+
+  import { loadArticleById } from '../LoadArticles.js';
   import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
   import { marked} from 'marked';
@@ -27,8 +31,6 @@
     name: "loading author name...",
     id: 0,
   });
-  const headings = ref([]);
-  // each heading object will include an id and a title
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -38,12 +40,13 @@
 
     console.log(`unmatched author: id ${id}`)
   }
-
+  
   customRenderer.heading = ({ text, depth }) => {
     const tagName = `h${depth + (depth!=6)}`;
     return `<${tagName}>${text}</${tagName}>`;
-  };
-
+  }; // This doesnt work when marked.use(customHeadingId()) is also used
+  // but it does work if the heading doesnt have an id
+  
   marked.setOptions({
     renderer: customRenderer,
     sanitize: true, // Ensure no unsafe HTML is rendered
@@ -51,7 +54,7 @@
   });
 
   marked.use(customHeadingId());
-
+  
   onMounted(async () => {
     function articleNotFound() {
       router.push('/articles/notfound');
@@ -112,54 +115,6 @@
   }
 </script>
 
-<style lang="scss">
-  @import "@/sf-scss/responsive";
-
-  h1.article-title {
-    font-size: 40px;
-    @include responsive(2) { font-size: calc(1); } // need to calculate more
-    @include responsive(1) { font-size: 29px; }
-
-    margin-bottom: 16px;
-  }
-
-  h4.article-hook {
-    font-size: 19px;
-
-    margin-bottom: 25px;
-  }
-
-  .meta-wrapper {
-    margin-bottom: 25px;
-    display: flex;
-    column-gap: 5px;
-    font-size: 0.95rem;
-
-    > * {
-      display: inline;
-    }
-
-    a {
-      color: var(--color-fg);
-    }
-
-    .article-readlength {
-      display: inline-flex;
-      align-items: center;
-      column-gap: 5px;
-
-      .material-symbols-outlined {
-        font-size: 1.3em;
-      }
-    }
-  }
-
-  .point-sep {
-    user-select: none;
-    padding: 0 2px;
-  }
-</style>
-
 <template>
   <ArticleWrapperOuter>
     <h1 class="article-title">{{ article.title }}</h1>
@@ -186,10 +141,44 @@
       </span>
     </div>
 
-    <ArticleWrapperImage :imgUrl="article.imgUrl" />
+    <div class="article-wrapper-inner">
+      <div class="headings">
+        <span bold>contents</span>
+        <hr class="hr-line">
+        <a v-for="heading in article.headings" :href="`#${heading.id}`" :class="`heading heading-level-${heading.level}`">
+          {{ heading.title }}
+        </a>
 
-    <br>
+        <span v-if="!exists(article.headings) || article.headings.length == 0">
+          {{ article.title }}
+        </span>
+      </div>
 
-    <SimpleContentWrapper v-html="marked(article.content)" />
+      <div class="headings-mobile">
+        <Dropdown style="display: block;">
+          <template #activator>
+            <DropdownActivator>
+              <button class="button-full button-headings">
+                <span class="material-symbols-outlined">toc</span>
+                View Contents
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+              </button>
+            </DropdownActivator>
+          </template>
+          <template #contents>
+            <DropdownContents>
+              <DropdownItem><a href="https://google.com">link</a></DropdownItem>
+              <DropdownItem>another item</DropdownItem>
+            </DropdownContents>
+          </template>
+        </Dropdown>
+      </div>
+
+      <div class="article-content">
+        <ArticleWrapperImage :imgUrl="article.imgUrl" />
+        <p class="author-biography">{{ author.biography }}</p>
+        <div v-html="marked(article.content)"></div>
+      </div>
+    </div>
   </ArticleWrapperOuter>
 </template>

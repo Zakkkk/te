@@ -1,7 +1,10 @@
 a {
-  color: $blue;
+  color: darken($blue, 15%);
   &:visited {
-    color: $blue;
+    color: darken($blue, 15%);
+  }
+  &:hover {
+    color: darken($blue, 23%);
   }
 }
 

@@ -10,9 +10,9 @@
   .article-wrapper-image {
     img {
       width: 100%;
-      aspect-ratio: 4 / 1;
-      @include responsive(2) { aspect-ratio: 3 / 1; }
-      @include responsive(1) { aspect-ratio: 5 / 2; }
+      aspect-ratio: 2.5 / 1;
+      @include responsive(2) { aspect-ratio: 2.5 / 1; }
+      @include responsive(1) { aspect-ratio: 2 / 1; }
       object-fit: cover;
     }
   }
