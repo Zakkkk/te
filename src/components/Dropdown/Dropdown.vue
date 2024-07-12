@@ -3,7 +3,7 @@
     <div @click="toggleDropdown">
       <slot name="activator"></slot>
     </div>
-    <div v-if="isOpen" class="dropdown-menu">
+    <div v-if="isOpen" class="dropdown-menu" @click="closeDropdown">
       <slot name="contents"></slot>
     </div>
   </div>
@@ -19,9 +19,13 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
+const closeDropdown = () => {
+  isOpen.value = false;
+};
+
 const handleClickOutside = (event) => {
   if (dropdown.value && !dropdown.value.contains(event.target)) {
-    isOpen.value = false;
+    closeDropdown();
   }
 };
 
@@ -34,7 +38,9 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
+@import '@/sf-scss/colors';
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -44,9 +50,12 @@ onUnmounted(() => {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border: 2px solid $lgrey-3;
+  border-radius: 2px;
   width: 100%;
+  padding: 6px 0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 </style>

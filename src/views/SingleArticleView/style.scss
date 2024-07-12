@@ -119,6 +119,20 @@ h4.article-hook {
         margin-left: auto;
       }
     }
+
+    .dropdown-menu {
+      .heading-level-1 {
+        padding-left: 0px;
+      }
+      
+      .heading-level-2 {
+        padding-left: 6px;
+      }
+    
+      .heading-level-3 {
+        padding-left: 12px;
+      }
+    }
   }
 
   .article-content {

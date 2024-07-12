@@ -154,7 +154,7 @@
         </span>
       </div>
 
-      <div class="headings-mobile">
+      <div class="headings-mobile" v-if="exists(article.headings) && article.headings.length != 0">
         <Dropdown style="display: block;">
           <template #activator>
             <DropdownActivator>
@@ -167,8 +167,9 @@
           </template>
           <template #contents>
             <DropdownContents>
-              <DropdownItem><a href="https://google.com">link</a></DropdownItem>
-              <DropdownItem>another item</DropdownItem>
+              <DropdownItem v-for="heading in article.headings">
+                <a :class="`heading-level-${heading.level}`" :href="`#${heading.id}`">{{ heading.title }}</a>
+              </DropdownItem>
             </DropdownContents>
           </template>
         </Dropdown>

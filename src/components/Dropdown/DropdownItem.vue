@@ -7,13 +7,18 @@
 <script setup>
 </script>
 
-<style scoped>
+<style scope lang="scss">
 .dropdown-item {
-  padding: 10px;
+  padding: 12px 20px;
+  font-weight: 500;
   cursor: pointer;
+
+  a {
+    display: block;
+  }
 }
 
 .dropdown-item:hover {
-  background-color: #f0f0f0;
+  background-color: darken(#fcfcfc, 10%);
 }
 </style>
