@@ -34,11 +34,10 @@
     console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
     console.log(`will be loading from point ${numberOfArticlesLoaded}`)
 
-    loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, true).then(response => {
+    loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, null, false).then(response => {
       console.log(response)
-      response.articles.forEach(article => {
-        articles.value.push(article);
-      });
+      
+      articles.value.push(...response.articles);
 
       numberOfArticlesLoaded += response.articles.length;
 

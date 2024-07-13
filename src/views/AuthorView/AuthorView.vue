@@ -5,8 +5,10 @@
 
   import { loadArticlesByAuthorId } from '../LoadArticles';
   import { authors } from '@/assets/authors.json';
+  import { onMounted, ref } from 'vue';
 
   const route = useRoute();
+  const articles = ref([]);
   const authorId = route.params.authorId;
 
   const matchAuthorFromId = id => {
@@ -19,6 +21,14 @@
   }
 
   const author = matchAuthorFromId(authorId);
+
+  onMounted(async () => {
+    loadArticlesByAuthorId(authorId, 7, 0, true).then(response => {
+      console.log(response);
+    });
+
+    console.log(articles.value);
+  })
 </script>
 
 <style lang="scss">
@@ -36,12 +46,9 @@
     <h4>Most Recent Articles</h4>
     <hr class="hr-line" />
     <div class="articles-wrapper">
-      <div class="article">article</div>
-      <div class="article">article</div>
-      <div class="article">article</div>
-      <div class="article">article</div>
-      <div class="article">article</div>
-      <div class="article">article</div>
+      <div v-for="article in articles" class="article">
+        {{ article.title }}
+      </div>
     </div>
   </SimpleContentWrapper>
 </template>
