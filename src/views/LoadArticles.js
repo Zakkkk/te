@@ -55,16 +55,35 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
   // the method:
   //  lets say we need 10 articles and 2 have already been loaded. we'll load 8 and see how many match the id we need until we've either searched all the articles, or gotten the number of articles we need
 
+  const listResponse = await axios.get(`/data/articles/list.json`);
+  const names = await listResponse.data.names;
+
   const articles = [];
   let remaining = 1;
+  let numberOfArticlesEvaluated = 0;
 
   let i = 0;
   while (articles.length < amount) {
+    console.log(`${articles.length} < ${amount}`);
+    console.log(articles.length)
 
-    loadArticles(
+    await loadArticles(
       amount - articles.length,
-      startingIndex
-    );
+      startingIndex+numberOfArticlesEvaluated,
+      names, false
+    ).then(response => {
+      response.articles.forEach(async article => {
+        if (article.author == id)  articles.push(article);
+        numberOfArticlesEvaluated++;
+      });
+
+      remaining = response.remaining;
+    });
+
+    if (numberOfArticlesEvaluated >= names.length) break;
+
+    // console.log(`${numberOfApprovedArticles} >= ${amount}`)
+    // if (numberOfApprovedArticles >= amount) break;
 
     i++;
     if (i >= 20) { console.log('needed to break'); break; }

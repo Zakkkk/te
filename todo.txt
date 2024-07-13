@@ -14,3 +14,4 @@ caching posts
 caching images/loading smaller images
 share buttons on article view
 series functionality
+adding sorter functionality for the articlesviews area
