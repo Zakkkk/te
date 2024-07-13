@@ -26,24 +26,33 @@
   }
 
   let numberOfArticlesLoaded = 0; // this is also the index we will be loading articles from i think
+  let newArticleAmountInCycle = 6; // gonna change to 12 later or maybe more
 
   async function loadArticleCycle() {
-    
+    console.log('load cycle called');
+    console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
+    console.log(`will be loading from point ${numberOfArticlesLoaded}`)
+
+    loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded).then(loadedArticles => {
+      console.log(loadedArticles)
+      loadedArticles.forEach(article => {
+        articles.value.push(article);
+      });
+      numberOfArticlesLoaded += loadedArticles.length;
+    });
   }
 
   function getAuthorNameById(id) {
     for (let i = 0; i < authors.length; i++) {
       if (authors[i].id == id)
-        return authors[i].name
+        return authors[i].name;
     }
 
     return `author #${id} not found`;
   }
 
   onMounted(async ()=>{
-    loadArticles(6).then(loadedArticles => {
-      articles.value = loadedArticles;
-    });
+    loadArticleCycle();
   });
 </script>
 
@@ -95,7 +104,7 @@
       </div>
     </div>
     <div class="loadmore">
-      <button>More Articles</button>
+      <button @click="loadArticleCycle()">More Articles</button>
     </div>
   </SimpleContentWrapper>
 </template>
