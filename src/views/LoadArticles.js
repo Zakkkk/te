@@ -18,7 +18,7 @@ async function loadArticleById(id, articleNotFound, names) {
   }
 }
 
-async function loadArticles(amount, startingIndex, names, startAtStart=true) {
+async function loadArticles(amount, startingIndex, names, startAtStart=false) {
   // The startingIndex refers to the first index of the names[] variable. startingIndex of 3 does not necessarily mean the third article, just the third indexed article under the names array.
   if (!exists(names)) {
     const listResponse = await axios.get(`/data/articles/list.json`);
@@ -64,52 +64,36 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
 
   let i = 0;
   while (articles.length < amount) {
-    console.log(`${articles.length} < ${amount}`);
-    console.log(articles.length)
+    // console.log(`loading ${amount - articles.length} starting from ${startingIndex + numberOfArticlesEvaluated}`)
+
+    console.log(`numberOfArticlesEvaluated: ${numberOfArticlesEvaluated}`)
 
     await loadArticles(
       amount - articles.length,
-      startingIndex+numberOfArticlesEvaluated,
-      names, false
+      startingIndex + numberOfArticlesEvaluated, //+ ((numberOfArticlesEvaluated != 0) ? -1 : 0), // shitty workaround i know. but basically this is kinda like the problem how the length of something is 7 but the 7th index doesnt exist. but for the very first time when we start we wanna start at 0 and not -1
+      names, startAtStart
     ).then(response => {
       response.articles.forEach(async article => {
         if (article.author == id)  articles.push(article);
+        console.log(`checked article #${article.id}: ${article.title}:`)
         numberOfArticlesEvaluated++;
+        // console.log('evaluated one more')
       });
 
       remaining = response.remaining;
     });
 
-    if (numberOfArticlesEvaluated >= names.length) break;
+    if (numberOfArticlesEvaluated+startingIndex >= names.length) break;
 
-    // console.log(`${numberOfApprovedArticles} >= ${amount}`)
-    // if (numberOfApprovedArticles >= amount) break;
 
     i++;
-    if (i >= 20) { console.log('needed to break'); break; }
+    if (i >= 100) { console.log('needed to break'); break; }
   }
-
-  // let i = 0;
-  // while (articles.length < amount) {
-  //   i++;
-
-  //   console.log(`i: ${i}. articles.length < amount -> ${articles.length} < ${amount}`)
-
-  //   loadArticles(amount-articles.length, startingIndex, startAtStart).then(response => {
-  //     console.log(response.articles)
-  //     // articles.push(...response.articles);
-  //     // console.log(articles.length);
-
-  //     // remaining = response.remaining;
-  //   });
-
-  //   if (remaining <= 0) { break; };
-  //   if (i >= 100) { console.log('ive passed over 100 iteraions bro'); break; }
-  // }
 
   return {
     articles: articles,
-    remaining: remaining
+    numberOfArticlesEvaluated: numberOfArticlesEvaluated,
+    remaining: remaining // the number of articles that have yet to be evaluated
   };
 }
 

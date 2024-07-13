@@ -11,6 +11,10 @@
   const articles = ref([]);
   const authorId = route.params.authorId;
 
+  const remaining = ref(1);
+  let numberOfArticlesEvaluated = 0;
+  const newArticleAmountInCycle = 1; // for test
+
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
       if (authors[i].id == id)
@@ -22,19 +26,37 @@
 
   const author = matchAuthorFromId(authorId);
 
-  onMounted(async () => {
-    loadArticlesByAuthorId(authorId, 7, 0, true).then(response => {
-      console.log(response);
-    });
 
-    console.log(articles.value);
+  async function loadArticleCycle() {
+    // console.log('load cycle called');
+    // console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
+    // console.log(`will be loading from point ${numberOfArticlesLoaded}`)
+
+    loadArticlesByAuthorId(
+      authorId,
+      newArticleAmountInCycle,
+      numberOfArticlesEvaluated,
+      false
+    ).then(response => {
+      console.log(response)
+      
+      articles.value.push(...response.articles);
+
+      numberOfArticlesEvaluated += response.numberOfArticlesEvaluated;
+
+      remaining.value = response.remaining;
+    });
+  }
+
+  onMounted(async () => {
+    loadArticleCycle();
   })
 </script>
 
 <style lang="scss">
 .articles-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 200px));
 }
 </style>
 
@@ -50,5 +72,6 @@
         {{ article.title }}
       </div>
     </div>
+    <button class="button-full" v-if="remaining != 0" @click="loadArticleCycle">loadArticleCycle()</button>
   </SimpleContentWrapper>
 </template>

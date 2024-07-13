@@ -27,12 +27,12 @@
   }
 
   let numberOfArticlesLoaded = 0; // this is also the index we will be loading articles from i think
-  let newArticleAmountInCycle = 6; // gonna change to 12 later or maybe more
+  const newArticleAmountInCycle = 6; // gonna change to 12 later or maybe more
 
   async function loadArticleCycle() {
-    console.log('load cycle called');
-    console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
-    console.log(`will be loading from point ${numberOfArticlesLoaded}`)
+    // console.log('load cycle called');
+    // console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
+    // console.log(`will be loading from point ${numberOfArticlesLoaded}`)
 
     loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, null, false).then(response => {
       console.log(response)
