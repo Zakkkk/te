@@ -8,7 +8,7 @@
     <simple-content-wrapper>
       <div class="footer-content">
         <div class="footer-links">
-          <router-link to="/" class="footer-link">contact</router-link>
+          <router-link to="/contact" class="footer-link">contact</router-link>
           <router-link to="/" class="footer-link">about</router-link>
           <router-link to="/" class="footer-link">privacy</router-link>
           <!-- privacy policy ^ -->

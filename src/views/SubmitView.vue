@@ -20,7 +20,7 @@
       <li>Well researched opinions with sources</li>
       <li>Well thought out articles</li>
       <li>Acknowledgements of drawbacks in argument</li>
-      <li>Headings to separate contents of a page</li>
+      <li>Headings to separate contents of an article</li>
       <li>Following rules of our <RouterLink to="/constitution">constitution</RouterLink></li>
     </ul>
     <h3>We don't like:</h3>

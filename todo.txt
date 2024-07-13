@@ -1,0 +1,16 @@
+turn the date functions into a util
+change mobile nav to include articles
+weird mobile nav going down 80% only
+Add meta data for each page
+Favicon visible on all backgrounds
+Contact page
+About page
+Privacy page
+Donate page
+separate stylesheet of navbar
+add a visual scroll bar to the left to show how much of the article is read
+inspo: https://honisoit.com/2024/05/sydney-law-school-cancels-july-intensives/
+caching posts
+caching images/loading smaller images
+share buttons on article view
+series functionality

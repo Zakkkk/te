@@ -5,7 +5,7 @@ hook: "On May 9, Sydney Law School announced that there would be no Winter inten
 author: 0
 date: 1720072392316
 imgUrl: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
-headings: [
+headings: [ # max of level 3 (ideally)
   { id: "heading-0", title: "Republica (plant)", level: 1},
   { id: "heading-1", title: "Distribution", level: 1 },
   { id: "heading-2", title: "History and Classification", level: 1 },

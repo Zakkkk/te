@@ -19,6 +19,7 @@
   // 1 = dense
 
   const articles = ref([]);
+  const remaining = ref(1);
 
   function setDensity(density) {
     cardType.value = density;
@@ -33,12 +34,15 @@
     console.log(`aiming to load ${newArticleAmountInCycle} articles.`);
     console.log(`will be loading from point ${numberOfArticlesLoaded}`)
 
-    loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded).then(loadedArticles => {
-      console.log(loadedArticles)
-      loadedArticles.forEach(article => {
+    loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, true).then(response => {
+      console.log(response)
+      response.articles.forEach(article => {
         articles.value.push(article);
       });
-      numberOfArticlesLoaded += loadedArticles.length;
+
+      numberOfArticlesLoaded += response.articles.length;
+
+      remaining.value = response.remaining;
     });
   }
 
@@ -103,7 +107,7 @@
         </ArticleList>
       </div>
     </div>
-    <div class="loadmore">
+    <div class="loadmore" v-if="remaining!=0">
       <button @click="loadArticleCycle()">More Articles</button>
     </div>
   </SimpleContentWrapper>

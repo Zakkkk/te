@@ -4,6 +4,7 @@ import HomeView from '@/views/HomeView.vue';
 import SubmitView from '@/views/SubmitView.vue';
 import ConstitutionView from '@/views/ConstitutionView.vue';
 import MissionView from '@/views/MissionView.vue';
+import ContactView from '@/views/ContactView.vue';
 import ArticleNotFoundView from '@/views/ArticleNotFoundView.vue';
 
 const router = createRouter({
@@ -32,7 +33,7 @@ const router = createRouter({
     {
       path: '/author/:authorId',
       name: 'author',
-      component: () => import('@/views/HomeView.vue')
+      component: () => import('@/views/AuthorView/AuthorView.vue')
     },
     {
       path: '/submit',
@@ -48,7 +49,12 @@ const router = createRouter({
       path: '/mission',
       name: 'mission statement',
       component: MissionView
-    }
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView
+    },
   ]
 })
 
