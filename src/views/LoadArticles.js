@@ -27,7 +27,7 @@ async function loadArticles(amount, startingIndex, names, startAtStart=false) {
   
   const articles = [];
 
-  if (!startAtStart) names.reverse(); // less efficient method but im gonna kms if i keep spending more time on this. Ill save this for future backend zak
+  if (!startAtStart) names = [...names].reverse(); // less efficient method but im gonna kms if i keep spending more time on this. Ill save this for future backend zak
 
   for (
     let i = startingIndex;
@@ -66,7 +66,8 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
   while (articles.length < amount) {
     // console.log(`loading ${amount - articles.length} starting from ${startingIndex + numberOfArticlesEvaluated}`)
 
-    console.log(`numberOfArticlesEvaluated: ${numberOfArticlesEvaluated}`)
+    console.log(`Want to load ${amount - articles.length} articles.`)
+    console.log(`Starting at index ${startingIndex + numberOfArticlesEvaluated} of the reversed array`)
 
     await loadArticles(
       amount - articles.length,
