@@ -66,8 +66,8 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
   while (articles.length < amount) {
     // console.log(`loading ${amount - articles.length} starting from ${startingIndex + numberOfArticlesEvaluated}`)
 
-    console.log(`Want to load ${amount - articles.length} articles.`)
-    console.log(`Starting at index ${startingIndex + numberOfArticlesEvaluated} of the reversed array`)
+    // console.log(`Want to load ${amount - articles.length} articles.`)
+    // console.log(`Starting at index ${startingIndex + numberOfArticlesEvaluated} of the reversed array`)
 
     await loadArticles(
       amount - articles.length,
@@ -76,7 +76,7 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
     ).then(response => {
       response.articles.forEach(async article => {
         if (article.author == id)  articles.push(article);
-        console.log(`checked article #${article.id}: ${article.title}:`)
+        // console.log(`checked article #${article.id}: ${article.title}:`)
         numberOfArticlesEvaluated++;
         // console.log('evaluated one more')
       });

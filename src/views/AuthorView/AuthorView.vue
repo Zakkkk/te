@@ -13,7 +13,7 @@
 
   const remaining = ref(1);
   let numberOfArticlesEvaluated = 0;
-  const newArticleAmountInCycle = 1; // for test
+  const newArticleAmountInCycle = 6; // for test
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -69,7 +69,7 @@
     <hr class="hr-line" />
     <div class="articles-wrapper">
       <div v-for="article in articles" class="article">
-        {{ article.title }}
+        <div class="article-title">{{ article.title }}</div>
       </div>
     </div>
     <button class="button-full" v-if="remaining != 0" @click="loadArticleCycle">loadArticleCycle()</button>
