@@ -15,13 +15,14 @@ async function loadArticleById(id, articleNotFound) {
   }
 }
 
-async function loadArticles(amount) {
+async function loadArticles(amount, startingIndex=0) {
+  // The startingIndex refers to the first index of the names[] variable. startingIndex of 3 does not necessarily mean the third article, just the third indexed article under the names array.
   const response = await axios.get(`/data/articles/list.json`);
   const names = await response.data.names;
   
-  const articles = []
+  const articles = [];
 
-  for (let i = 0; i < names.length; i++) {
+  for (let i = startingIndex; i < names.length; i++) {
     if (i > amount-1) break;
 
     articles.push(await loadArticleById(parseInt(names[i])));

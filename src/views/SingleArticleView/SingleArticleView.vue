@@ -41,10 +41,10 @@
     console.log(`unmatched author: id ${id}`)
   }
   
-  customRenderer.heading = ({ text, depth }) => {
-    const tagName = `h${depth + (depth!=6)}`;
-    return `<${tagName}>${text}</${tagName}>`;
-  }; // This doesnt work when marked.use(customHeadingId()) is also used
+  // customRenderer.heading = ({ text, depth }) => {
+  //   const tagName = `h${depth + (depth!=6)}`;
+  //   return `<${tagName}>${text}</${tagName}>`;
+  // }; // This doesnt work when marked.use(customHeadingId()) is also used
   // but it does work if the heading doesnt have an id
   
   marked.setOptions({

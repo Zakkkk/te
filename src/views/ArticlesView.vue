@@ -25,6 +25,12 @@
     cache.set('displayType', density);
   }
 
+  let numberOfArticlesLoaded = 0; // this is also the index we will be loading articles from i think
+
+  async function loadArticleCycle() {
+    
+  }
+
   function getAuthorNameById(id) {
     for (let i = 0; i < authors.length; i++) {
       if (authors[i].id == id)
