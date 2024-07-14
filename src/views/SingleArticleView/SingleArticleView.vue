@@ -15,13 +15,15 @@
   import { marked} from 'marked';
   import customHeadingId from "marked-custom-heading-id";
 
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, onUnmounted } from 'vue';
   import { useRoute, useRouter } from "vue-router";
   import { RouterLink } from 'vue-router';
 
   const route = useRoute();
   const router = useRouter();
   const customRenderer = new marked.Renderer();
+
+  const progress = ref(0);
 
   const article = ref({
     content: 'loading...',
@@ -113,9 +115,30 @@
 
     return `${articleLength} ${articleLength == 1 ? " minute" : " minutes"}`;
   }
+
+  function getScrollPercent() { // this is bad, because it isnt based on the article height but rather the page
+    var h = document.documentElement, 
+        b = document.body,
+        st = 'scrollTop',
+        sh = 'scrollHeight';
+    return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+  }
+
+  function onScroll () {
+    progress.value = getScrollPercent();
+  }
+
+  onMounted(() => {
+    document.addEventListener('scroll', onScroll);
+  });
+
+  onUnmounted(() => {
+    document.removeEventListener('scroll', onScroll);
+  });
 </script>
 
 <template>
+  <div class="progress-bar" :style="`height: ${progress}%`"></div>
   <ArticleWrapperOuter>
     <h1 class="article-title">{{ article.title }}</h1>
 
@@ -179,6 +202,23 @@
         <ArticleWrapperImage :imgUrl="article.imgUrl" />
         <p class="author-biography">{{ author.biography }}</p>
         <div v-html="marked(article.content)"></div>
+      </div>
+
+      <div class="article-share-wrapper">
+        <div class="article-share">
+          <div class="article-share-link">
+            <span class="material-symbols-outlined">share</span>
+          </div>
+          <div class="article-share-link">
+            <span class="article-share-link-instagram"></span>
+          </div>
+          <div class="article-share-link">
+            <span class="article-share-link-twitter"></span>
+          </div>
+          <div class="article-share-link">
+            <span class="article-share-link-facebook"></span>
+          </div>
+        </div>
       </div>
     </div>
   </ArticleWrapperOuter>

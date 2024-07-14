@@ -65,7 +65,7 @@
     <h1>{{ author.name }}</h1>
     <p>{{ author.biography }}</p>
     <br />
-    <h4>Most Recent Articles</h4>
+    <h4>Latest Articles From {{ author.name }}</h4>
     <hr class="hr-line" />
     <div class="articles-wrapper">
       <div v-for="article in articles" class="article">
