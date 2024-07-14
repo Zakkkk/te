@@ -13,6 +13,8 @@ const props = defineProps({
     &.article-list-displayType-0 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+      article { max-width: 500px; } // dont like this code
+
       gap: 25px;
       @include responsive(2) {
         gap: 16px;

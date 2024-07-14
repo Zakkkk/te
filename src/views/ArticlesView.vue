@@ -65,12 +65,8 @@
     return `author #${id} not found`;
   }
 
-  function isVisible(article) {
-    if (!exists(article)) return true;
-
-    return  article.title.toLowerCase().includes(searchFilter.trim().toLowerCase()) ||
-            article.description.toLowerCase().includes(searchFilter.trim().toLowerCase()) ||
-            getAuthorNameById(article.author).toLowerCase.includes(searchFilter.trim().toLowerCase());
+  function onInputChange () {
+    
   }
 
   onMounted(async ()=>{
@@ -95,7 +91,11 @@
   <SimpleContentWrapper>
     <h3>Search for an article</h3>
     <p>Begin by typing an article title, tags or related words.</p>
-    <input v-model="searchFilter" type="text" placeholder="Search for an article...">
+    <input 
+      v-model="searchFilter"
+      type="text"
+      placeholder="Search for an article..."
+      @input="onInputChange" />
 
     <!-- Maybe possibly highlight the parts that match -->
 
