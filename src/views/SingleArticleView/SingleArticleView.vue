@@ -10,11 +10,12 @@
   import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
   import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
-  import { loadArticleById, loadArticlesByAuthorId } from '../LoadArticles.js';
+  import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '../LoadArticles.js';
   import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
   import { marked} from 'marked';
   import customHeadingId from "marked-custom-heading-id";
+  import clamp from '@/util/clamp';
 
   import { ref, onMounted, onUnmounted } from 'vue';
   import { useRoute, useRouter } from "vue-router";
@@ -35,7 +36,8 @@
     id: -1,
   });
 
-  const otherArticlesByAuthor = ref([])
+  const otherArticlesByAuthor = ref([]);
+  const latestArticles = ref([]);
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -69,28 +71,47 @@
       article.value = loadedArticle;
       author.value = matchAuthorFromId(article.value.author);
 
-      let needToLoadOneMoreArticle = false;
-      let lastEvaluatedPosition = 0;
+      let needToLoadOneMoreArticleByAuthor = false;
+      let lastEvaluatedPositionByAuthor = 0;
+
+      let needToLoadOneMoreArticleLatest = false;
+      let lastEvaluatedPositionLatest = 0;
 
       loadArticlesByAuthorId(article.value.author, 3, 0, false).then(response => {
         response.articles.forEach(authorArticle => {
           if (authorArticle.id == article.value.id) {
-            needToLoadOneMoreArticle = true;
+            needToLoadOneMoreArticleByAuthor = true;
             return;
           };
 
           otherArticlesByAuthor.value.push(authorArticle);
         })
 
-        lastEvaluatedPosition = response.numberOfArticlesEvaluated;
+        lastEvaluatedPositionByAuthor = response.numberOfArticlesEvaluated;
+
+        if (needToLoadOneMoreArticleByAuthor)
+          loadArticlesByAuthorId(article.value.author, 1, lastEvaluatedPositionByAuthor, false).then(response => {
+            otherArticlesByAuthor.value.push(...response.articles); // should only return 1 at most
+
+            lastEvaluatedPositionByAuthor = response.numberOfArticlesEvaluated; // probs not needed
+          });
       })
 
-      if (needToLoadOneMoreArticle)
-        loadArticlesByAuthorId(article.value.author, 1, lastEvaluatedPosition, false).then(response => {
-          otherArticlesByAuthor.value.push(...response.articles); // should only return 1 at most
+      loadArticles(3, 0, null, false).then(response => {
+        response.articles.forEach(latestArticle => {
+          if (latestArticle.id == article.value.id) {
+            needToLoadOneMoreArticleLatest = true;
+            return;
+          }
 
-          lastEvaluatedPosition = response.numberOfArticlesEvaluated; // probs not needed
-        });
+          latestArticles.value.push(latestArticle);
+        })
+
+        if (needToLoadOneMoreArticleLatest)
+          loadArticles(1, latestArticles.value.length+1, null, false).then(response => {
+            latestArticles.value.push(...response.articles); // should only return 1 at most
+          });
+      });
     });
   });
 
@@ -164,7 +185,7 @@
 </script>
 
 <template>
-  <div class="progress-bar" :style="`height: ${progress}%`"></div>
+  <div class="progress-bar" :style="`height: ${clamp(progress, 0, 100)}%`"></div>
   <ArticleWrapperOuter>
     <h1 class="article-title">{{ article.title }}</h1>
 
@@ -256,8 +277,16 @@
     <br>
 
     <SimpleContentWrapper>
+      <hr class="hr-line" />
       <h3>More from {{ author.name }}</h3>
-      <div v-for="article in otherArticlesByAuthor">{{ article.title }}</div>
+      <div v-for="article in otherArticlesByAuthor">
+        <a :href="`/articles/${article.id}`">{{ article.title }}</a>
+      </div>
+      <br>
+      <h3>Latest Articles</h3>
+      <div v-for="article in latestArticles">
+        <a :href="`/articles/${article.id}`">{{ article.title }}</a>
+      </div>
     </SimpleContentWrapper>
   </ArticleWrapperOuter>
 </template>

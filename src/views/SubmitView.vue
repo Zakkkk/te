@@ -31,5 +31,7 @@
       <li>Overly technical language</li>
       <li>Overly vulgar language</li>
     </ul>
+    <br>
+    <h4>Here are some posts we love:</h4>
   </SimpleContentWrapper>
 </template>
