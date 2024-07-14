@@ -191,9 +191,14 @@
           </template>
           <template #contents>
             <DropdownContents>
-              <DropdownItem v-for="heading in article.headings">
+              <!-- <DropdownItem v-for="heading in article.headings">
                 <a :class="`heading-level-${heading.level}`" :href="`#${heading.id}`">{{ heading.title }}</a>
-              </DropdownItem>
+              </DropdownItem> -->
+              <a :href="`#${heading.id}`" v-for="heading in article.headings">
+                <DropdownItem>
+                  <span :class="`heading-level-${heading.level}`">{{ heading.title }}</span>
+                </DropdownItem>
+              </a>
             </DropdownContents>
           </template>
         </Dropdown>

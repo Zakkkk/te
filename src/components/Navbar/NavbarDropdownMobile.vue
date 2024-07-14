@@ -6,11 +6,6 @@
   const navToggle = () => {
     isOpen.value = !isOpen.value;
   }
-
-  const props = defineProps({
-    navHeight: 0,
-    mobileNavActive: false
-  })
 </script>
 
 <template>
@@ -22,8 +17,7 @@
     </div>
 
     <div
-      :class="`nav-mobile-dropdown-content ${isOpen?'nav-mobile-dropdown-active':''}`" 
-      :style="`bottom: ${props.navHeight}px`">
+      :class="`nav-mobile-dropdown-content ${isOpen?'nav-mobile-dropdown-active':''}`">
       <div class="nav-mobile-dropdown-content-wrapper">
         <slot></slot>
       </div>

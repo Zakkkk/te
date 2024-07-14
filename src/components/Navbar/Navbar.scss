@@ -10,12 +10,12 @@
   z-index: 10;
 
   @include responsive(1) { 
-    position: fixed; 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-bottom: 0;
-    border-top: 1px solid $lgrey-3;
+    // position: fixed; 
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    // border-bottom: 0;
+    // border-top: 1px solid $lgrey-3;
   }
 
   &, a, a:active {
@@ -99,6 +99,8 @@
       font-size:0.95rem;
     }
 
+    .nav-mobile-dropdown-wrapper { display: none; }
+
     @include responsive(1) {
       width: 90%;
       columns-gap: 20px;
@@ -110,6 +112,7 @@
       }
 
       .nav-mobile-dropdown-wrapper {
+        display: block;
         position: absolute;
         right: 0;
 

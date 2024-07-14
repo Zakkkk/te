@@ -78,7 +78,9 @@ const articleURL = `/articles/${props.articleId}`;
         <span class="article-meta-sep">/</span>
         <time class="article-date" :datetime="getCurrentDateFormatted(props.date)">{{ getFormattedDateFromTimestamp(props.date) }}</time>
       </div>
-      <p class="article-description">{{ props.description }}</p>
+      <p class="article-description">
+        <RouterLink :to="articleURL">{{ props.description }}</RouterLink>
+      </p>
     </div>
   </article>
 </template>
