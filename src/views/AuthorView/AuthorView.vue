@@ -69,7 +69,9 @@
     <hr class="hr-line" />
     <div class="articles-wrapper">
       <div v-for="article in articles" class="article">
-        <div class="article-title">{{ article.title }}</div>
+        <div class="article-title">
+          <RouterLink :to="`/articles/${article.id}`">{{ article.title }}</RouterLink>
+        </div>
       </div>
     </div>
     <button class="button-full" v-if="remaining != 0" @click="loadArticleCycle">loadArticleCycle()</button>

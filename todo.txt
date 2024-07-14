@@ -8,11 +8,11 @@ About page
 Privacy page
 Donate page
 separate stylesheet of navbar
-add a visual scroll bar to the left to show how much of the article is read
+add a visual scroll bar to the left to show how much of the article is read (fix)
 inspo: https://honisoit.com/2024/05/sydney-law-school-cancels-july-intensives/
 caching posts
 caching images/loading smaller images
-share buttons on article view
 series functionality
 adding sorter functionality for the articlesviews area
 images in posts
+separate fucking things out into components (esp share articl)

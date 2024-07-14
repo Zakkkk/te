@@ -3,6 +3,7 @@
 
   import ArticleWrapperOuter from '@/components/ArticleWrapper/ArticleWrapperOuter.vue';
   import ArticleWrapperImage from '@/components/ArticleWrapper/ArticleWrapperImage.vue'
+  import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
   
   import Dropdown from '@/components/Dropdown/Dropdown.vue'; // Adjust the path as needed
   import DropdownActivator from '@/components/Dropdown/DropdownActivator.vue';
@@ -221,5 +222,12 @@
         </div>
       </div>
     </div>
+
+    <br>
+
+    <SimpleContentWrapper>
+      <h3>More from {{ author.name }}</h3>
+      <p>lorem600</p>
+    </SimpleContentWrapper>
   </ArticleWrapperOuter>
 </template>
