@@ -28,6 +28,8 @@
   }
 
   function setOrder(order) {
+    if (newestFirst.value == order) return;
+
     newestFirst.value = order;
     cache.set('newestFirst', order);
 

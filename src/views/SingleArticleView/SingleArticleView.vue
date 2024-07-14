@@ -10,7 +10,7 @@
   import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
   import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
-  import { loadArticleById } from '../LoadArticles.js';
+  import { loadArticleById, loadArticlesByAuthorId } from '../LoadArticles.js';
   import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
   import { marked} from 'marked';
@@ -32,8 +32,10 @@
   });
   const author = ref({
     name: "loading author name...",
-    id: 0,
+    id: -1,
   });
+
+  const otherArticlesByAuthor = ref([])
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -66,6 +68,29 @@
     loadArticleById(route.params.articleId, articleNotFound).then(loadedArticle => {
       article.value = loadedArticle;
       author.value = matchAuthorFromId(article.value.author);
+
+      let needToLoadOneMoreArticle = false;
+      let lastEvaluatedPosition = 0;
+
+      loadArticlesByAuthorId(article.value.author, 3, 0, false).then(response => {
+        response.articles.forEach(authorArticle => {
+          if (authorArticle.id == article.value.id) {
+            needToLoadOneMoreArticle = true;
+            return;
+          };
+
+          otherArticlesByAuthor.value.push(authorArticle);
+        })
+
+        lastEvaluatedPosition = response.numberOfArticlesEvaluated;
+      })
+
+      if (needToLoadOneMoreArticle)
+        loadArticlesByAuthorId(article.value.author, 1, lastEvaluatedPosition, false).then(response => {
+          otherArticlesByAuthor.value.push(...response.articles); // should only return 1 at most
+
+          lastEvaluatedPosition = response.numberOfArticlesEvaluated; // probs not needed
+        });
     });
   });
 
@@ -232,7 +257,7 @@
 
     <SimpleContentWrapper>
       <h3>More from {{ author.name }}</h3>
-      <p>lorem600</p>
+      <div v-for="article in otherArticlesByAuthor">{{ article.title }}</div>
     </SimpleContentWrapper>
   </ArticleWrapperOuter>
 </template>
