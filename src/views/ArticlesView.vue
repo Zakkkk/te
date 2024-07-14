@@ -15,6 +15,7 @@
 
   const cardType = ref(defaultDisplayType); // 0 = card, 1 = dense
   const newestFirst = ref(true);
+  const searchFilter = ref("");
 
   const articles = ref([]);
   const remaining = ref(1);
@@ -64,6 +65,14 @@
     return `author #${id} not found`;
   }
 
+  function isVisible(article) {
+    if (!exists(article)) return true;
+
+    return  article.title.toLowerCase().includes(searchFilter.trim().toLowerCase()) ||
+            article.description.toLowerCase().includes(searchFilter.trim().toLowerCase()) ||
+            getAuthorNameById(article.author).toLowerCase.includes(searchFilter.trim().toLowerCase());
+  }
+
   onMounted(async ()=>{
     loadArticleCycle();
   });
@@ -86,7 +95,7 @@
   <SimpleContentWrapper>
     <h3>Search for an article</h3>
     <p>Begin by typing an article title, tags or related words.</p>
-    <input type="text" placeholder="Search for an article...">
+    <input v-model="searchFilter" type="text" placeholder="Search for an article...">
 
     <!-- Maybe possibly highlight the parts that match -->
 
@@ -117,6 +126,7 @@
     <ArticleList :displayType="cardType">
       <ArticleListItem
         v-for="article in articles"
+
         :displayType="cardType"
 
         :articleId="article.id"
@@ -126,6 +136,7 @@
         :author="getAuthorNameById(article.author)"
         :date="article.date"
         :description="article.content.slice(0,220)"
+        :searchFilter="searchFilter"
       />
     </ArticleList>
     <div class="loadmore" v-if="remaining!=0">

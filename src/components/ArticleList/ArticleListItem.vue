@@ -49,8 +49,15 @@ const props = defineProps({
   authorId: 0,
   author: 'author',
   date: new Date().getTime(),
-  description: 'description'
+  description: 'description',
+  searchFilter: ''
 });
+
+function isVisible() {
+    return  props.title.toLowerCase().includes(props.searchFilter.trim().toLowerCase()) ||
+            props.description.toLowerCase().includes(props.searchFilter.trim().toLowerCase()) ||
+            props.author.toLowerCase().includes(props.searchFilter.trim().toLowerCase());
+  }
 
 //
 // Maybe an svg before the image loads
@@ -65,7 +72,7 @@ const articleURL = `/articles/${props.articleId}`;
 </style>
 
 <template>
-  <article :class="`article-displayType-${props.displayType}`">
+  <article :class="`article-displayType-${props.displayType}`" v-if="isVisible()">
     <RouterLink :to="articleURL" class="article-image-wrapper">
       <img :alt="`Main image for '${props.title}'`" class="article-image" :src="props.imgUrl">
     </RouterLink>

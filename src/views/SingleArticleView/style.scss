@@ -214,10 +214,15 @@ h4.article-hook {
         height: 40px;
         display: flex;
         align-items: center;
-        opacity: 0.4;
-        @include responsive(1) { opacity: 1; }
-        transition: opacity $sf-transition;
-        &:hover { opacity: 1; transition: opacity $sf-transition; }
+        // opacity: 0.4;
+        filter: saturate(20%);
+        @include responsive(1) { filter: saturate(100%); }
+        transition: filter $sf-transition;
+        &:hover {
+          opacity: 1;
+          filter: saturate(100%);
+          transition: filter $sf-transition;
+        }
 
         .article-share-link-instagram {
           background: url('/svg/instagram_color.svg') no-repeat center;
