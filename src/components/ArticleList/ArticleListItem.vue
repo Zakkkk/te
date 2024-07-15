@@ -81,7 +81,7 @@ const articleURL = `/articles/${props.articleId}`;
         <RouterLink :to="articleURL"><h6 class="article-title">{{ props.title }}</h6></RouterLink>
       </div>
       <div class="article-meta-wrapper">
-        <a class="article-author" :href="`/author/${props.authorId}`"><address>{{ props.author }}</address></a>
+        <RouterLink class="article-author" :to="`/author/${props.authorId}`"><address>{{ props.author }}</address></RouterLink>
         <span class="article-meta-sep">/</span>
         <time class="article-date" :datetime="getCurrentDateFormatted(props.date)">{{ getFormattedDateFromTimestamp(props.date) }}</time>
       </div>

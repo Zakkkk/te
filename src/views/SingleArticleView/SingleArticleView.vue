@@ -213,7 +213,7 @@
 
     <div class="article-wrapper-inner">
       <div class="headings">
-        <span bold>contents</span>
+        <span bold>Contents</span>
         <hr class="hr-line">
         <a v-for="heading in article.headings" :href="`#${heading.id}`" :class="`heading heading-level-${heading.level}`">
           {{ heading.title }}
