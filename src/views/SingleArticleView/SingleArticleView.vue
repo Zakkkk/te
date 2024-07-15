@@ -10,7 +10,7 @@
   import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
   import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
-  import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '../LoadArticles.js';
+  import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '@/api/LoadArticles.js';
   import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
   import { marked} from 'marked';

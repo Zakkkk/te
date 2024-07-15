@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
+import HomeView from '@/views/HomeView/HomeView.vue';
 // import ArticleView from '../views/ArticleView.vue'
 import SubmitView from '@/views/SubmitView.vue';
 import ConstitutionView from '@/views/ConstitutionView.vue';
@@ -18,7 +18,7 @@ const router = createRouter({
     {
       path: '/articles',
       name: 'articles',
-      component: () => import('@/views/ArticlesView.vue')
+      component: () => import('@/views/ArticlesView/ArticlesView.vue')
     },
     {
       path: '/articles/:articleId',

@@ -1,6 +1,6 @@
 <script setup>
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
-  import { loadArticles } from './LoadArticles.js';
+  import { loadArticles } from '@/api/LoadArticles.js';
   import { ref, onMounted } from 'vue';
   import ArticleList from '@/components/ArticleList/ArticleList.vue';
   import ArticleListItem from '@/components/ArticleList/ArticleListItem.vue';

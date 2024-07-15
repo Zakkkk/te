@@ -3,7 +3,7 @@
   
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
 
-  import { loadArticlesByAuthorId } from '../LoadArticles';
+  import { loadArticlesByAuthorId } from '@/api/LoadArticles';
   import { authors } from '@/assets/authors.json';
   import { onMounted, ref } from 'vue';
 
