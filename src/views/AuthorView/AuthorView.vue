@@ -67,6 +67,7 @@
     <br />
     <h4>Latest Articles From {{ author.name }}</h4>
     <hr class="hr-line" />
+    <!-- Gonna have an Article gallery here. -->
     <div class="articles-wrapper">
       <div v-for="article in articles" class="article">
         <div class="article-title">

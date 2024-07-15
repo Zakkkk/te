@@ -139,6 +139,7 @@
         :searchFilter="searchFilter"
       />
     </ArticleList>
+    
     <div class="loadmore" v-if="remaining!=0">
       <button @click="loadArticleCycle()">More Articles</button>
     </div>
