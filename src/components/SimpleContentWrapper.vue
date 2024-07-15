@@ -5,7 +5,7 @@
 .simple-content-wrapper {
   width: 80%;
   max-width: $break-point-2;
-  margin: auto;
+  margin: 0 auto;
 
   @include responsive(2) {
     width: 90%;

@@ -1,8 +1,8 @@
 <script setup>
   import './style.scss';
 
-  import ArticleWrapperOuter from '@/components/ArticleWrapper/ArticleWrapperOuter.vue';
-  import ArticleWrapperImage from '@/components/ArticleWrapper/ArticleWrapperImage.vue'
+  import ArticleWrapperOuter from './ArticleWrapper/ArticleWrapperOuter.vue';
+  import ArticleWrapperImage from './ArticleWrapper/ArticleWrapperImage.vue'
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
   
   import Dropdown from '@/components/Dropdown/Dropdown.vue'; // Adjust the path as needed
@@ -15,7 +15,9 @@
   import { authors } from '@/assets/authors.json';
   import { marked} from 'marked';
   import customHeadingId from "marked-custom-heading-id";
+
   import clamp from '@/util/clamp';
+  import { getCurrentDateFormatted, getFormattedDateFromTime } from '@/util/dates.js';
 
   import { ref, onMounted, onUnmounted } from 'vue';
   import { useRoute, useRouter } from "vue-router";
@@ -114,45 +116,6 @@
       });
     });
   });
-
-  function getCurrentDateFormatted(date) {
-    if (date == undefined || date == null)
-      date = new Date().getTime();
-
-    const newDate = new Date(date)
-
-    const year = newDate.getFullYear();
-    const month = String(newDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-    const day = String(newDate.getDate()).padStart(2, '0');
-    
-    return `${year}-${month}-${day}`;
-  }
-
-  function getFormattedDateFromTime(timestamp) {
-    const date = new Date(timestamp);
-
-    const year = date.getFullYear();
-
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    const month = monthNames[date.getMonth()];
-
-    const day = date.getDate();
-    let daySuffix;
-    if (day % 10 === 1 && day !== 11) {
-        daySuffix = "st";
-    } else if (day % 10 === 2 && day !== 12) {
-        daySuffix = "nd";
-    } else if (day % 10 === 3 && day !== 13) {
-        daySuffix = "rd";
-    } else {
-        daySuffix = "th";
-    }
-
-    return `${day}${daySuffix} ${month}, ${year}`;
-  }
 
   function getReadLengthText(content) {
     if (!exists(content))

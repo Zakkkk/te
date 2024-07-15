@@ -2,8 +2,8 @@
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
   import { loadArticles } from '@/api/LoadArticles.js';
   import { ref, onMounted } from 'vue';
-  import ArticleList from '@/components/ArticleList/ArticleList.vue';
-  import ArticleListItem from '@/components/ArticleList/ArticleListItem.vue';
+  import ArticleList from './ArticleList/ArticleList.vue';
+  import ArticleListItem from './ArticleList/ArticleListItem.vue';
   import { authors } from '@/assets/authors.json';
   import cache from '@/util/cache.js';
   import exists from '@/util/exists.js';
