@@ -1,5 +1,6 @@
 <script setup>
 import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
+import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
 
 const props = defineProps({
   otherArticlesByAuthor: Array,
@@ -13,13 +14,11 @@ const props = defineProps({
   <SimpleContentWrapper>
     <hr class="hr-line" />
     <h3>More from {{ author.name }}</h3>
-    <div v-for="article in otherArticlesByAuthor">
-      <a :href="`/articles/${article.id}`">{{ article.title }}</a>
-    </div>
+    <SimpleArticleGallery 
+      :articles="otherArticlesByAuthor" />
     <br>
     <h3>Latest Articles</h3>
-    <div v-for="article in latestArticles">
-      <a :href="`/articles/${article.id}`">{{ article.title }}</a>
-    </div>
+    <SimpleArticleGallery 
+      :articles="latestArticles" />
   </SimpleContentWrapper>
 </template>

@@ -2,6 +2,8 @@ import yaml from 'js-yaml';
 import axios from 'axios';
 import exists from '@/util/exists';
 
+import authors from '@/assets/authors.json';
+
 async function loadArticleById(id, articleNotFound, names) {
   if (!exists(names)) {
     const listResponse = await axios.get(`/data/articles/list.json`);
@@ -98,8 +100,19 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
   };
 }
 
+function getAuthorById(id) {
+  let chosenAuthor;
+
+  authors.authors.forEach(author => {
+    if (author.id == id) chosenAuthor = author;
+  })
+
+  return chosenAuthor;
+}
+
 export {
   loadArticleById,
   loadArticles,
-  loadArticlesByAuthorId
+  loadArticlesByAuthorId,
+  getAuthorById
 };
