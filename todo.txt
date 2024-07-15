@@ -16,3 +16,7 @@ series functionality
 adding an autoload to the searchFilter
 separate fucking things out into components (esp share articl)
 put an entire article display on articlesview into a link
+
+
+
+*** COLES TRAINING ***

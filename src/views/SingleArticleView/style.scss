@@ -25,36 +25,6 @@ h4.article-hook {
   background: var(--color-primary);
 }
 
-.meta-wrapper {
-  margin-bottom: 25px;
-  display: flex;
-  column-gap: 5px;
-  font-size: 0.95rem;
-
-  > * {
-    display: inline;
-  }
-
-  a {
-    color: var(--color-fg);
-  }
-
-  .article-readlength {
-    display: inline-flex;
-    align-items: center;
-    column-gap: 5px;
-
-    .material-symbols-outlined {
-      font-size: 1.3em;
-    }
-  }
-}
-
-.point-sep {
-  user-select: none;
-  padding: 0 2px;
-}
-
 .article-wrapper-inner {
   display: grid;
   grid-template-columns: 1fr 3fr 55px;
@@ -67,91 +37,6 @@ h4.article-hook {
     //   grid-column: 1 / -1;
     //   width: 100%;
     // }
-  }
-
-  .headings {
-    position: sticky;
-    top: 10px;
-    @include responsive(1) {
-      position: static;
-      top: 0;
-      display: none;
-    }
-
-    align-self: start;
-    padding-right: 30px;
-
-    .heading {
-      // is an a tag
-      display: block;
-      $base-font-size: 16px;
-      line-height: 1.3;
-      margin-bottom: 10px;
-
-      &.heading-level-1 {
-        padding-left: 0px;
-        font-size: calc($base-font-size);
-      }
-      
-      &.heading-level-2 {
-        padding-left: 6px;
-        font-size: calc($base-font-size*.93);
-      }
-    
-      &.heading-level-3 {
-        padding-left: 12px;
-        font-size: calc($base-font-size*.88);
-      }
-
-      @include responsive(2) {
-        &.heading-level-1 {
-          padding-left: 0px;
-          font-size: calc($base-font-size*.88);
-        }
-        
-        &.heading-level-2 {
-          padding-left: 6px;
-          font-size: calc($base-font-size*.9*.9);
-        }
-      
-        &.heading-level-3 {
-          padding-left: 12px;
-          font-size: calc($base-font-size*.8*.9);
-        }
-      }
-        
-    }
-  }
-
-  .headings-mobile {
-    display: none;
-    @include responsive(1) { display: block; }
-
-    margin-bottom: 25px;
-
-    .button-headings {
-      display: flex;
-      align-items: center;
-      column-gap: 20px;
-
-      :last-child {
-        margin-left: auto;
-      }
-    }
-
-    .dropdown-menu {
-      .heading-level-1 {
-        padding-left: 0px;
-      }
-      
-      .heading-level-2 {
-        padding-left: 6px;
-      }
-    
-      .heading-level-3 {
-        padding-left: 12px;
-      }
-    }
   }
 
   .article-content {
@@ -188,69 +73,6 @@ h4.article-hook {
       @include responsive(1) { width: 75%; }
       margin: 0 auto;
       display: block;
-    }
-  }
-
-  .article-share-wrapper {
-    // border: 1px solid red;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    align-self: start;
-
-    .article-share {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: end;
-      padding-right:5px;
-      justify-content: center;
-      gap: 30px;
-
-      .article-share-link {
-        // https://www.iconfinder.com/social-media-icons
-
-        cursor: pointer;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        // opacity: 0.4;
-        filter: saturate(20%);
-        @include responsive(1) { filter: saturate(100%); }
-        transition: filter $sf-transition;
-        &:hover {
-          opacity: 1;
-          filter: saturate(100%);
-          transition: filter $sf-transition;
-        }
-
-        .article-share-link-instagram {
-          background: url('/svg/instagram_color.svg') no-repeat center;
-          padding: 15px;
-        }
-
-        .article-share-link-twitter {
-          background: url('/svg/twitter.svg') no-repeat center;
-          padding: 15px;
-        }
-
-        .article-share-link-facebook {
-          background: url('/svg/facebook.svg') no-repeat center;
-          padding: 15px;
-        }
-      }
-    }
-
-    @include responsive(1) {
-      position: static;
-      flex-direction: row;
-      align-self: auto;
-      height: inherit;
-      padding-top: 35px;
-
-      .article-share {
-        flex-direction: row;
-      }
     }
   }
 }

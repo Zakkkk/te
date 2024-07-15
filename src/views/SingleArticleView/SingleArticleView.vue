@@ -3,12 +3,10 @@
 
   import ArticleWrapperOuter from './ArticleWrapper/ArticleWrapperOuter.vue';
   import ArticleWrapperImage from './ArticleWrapper/ArticleWrapperImage.vue'
-  import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
-  
-  import Dropdown from '@/components/Dropdown/Dropdown.vue'; // Adjust the path as needed
-  import DropdownActivator from '@/components/Dropdown/DropdownActivator.vue';
-  import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
-  import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
+  import SingleArticleMore from './SingleArticleMore.vue';
+  import SingleArticleShare from './SingleArticleShare.vue';
+  import SingleArticleMeta from './SingleArticleMeta.vue';
+  import SingleArticleHeadings from './SingleArticleHeadings.vue';
 
   import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '@/api/LoadArticles.js';
   import exists from '@/util/exists.js';
@@ -17,7 +15,6 @@
   import customHeadingId from "marked-custom-heading-id";
 
   import clamp from '@/util/clamp';
-  import { getCurrentDateFormatted, getFormattedDateFromTime } from '@/util/dates.js';
 
   import { ref, onMounted, onUnmounted } from 'vue';
   import { useRoute, useRouter } from "vue-router";
@@ -154,64 +151,17 @@
 
     <h4 class="article-hook">{{ article.hook }}</h4>
 
-    <div class="meta-wrapper">
-      <span>by</span>
-      
-      <address bold-semi><RouterLink :to="`/author/${author.id}`">{{ author.name }}</RouterLink></address>
-
-      <span class="point-sep">&#8212;</span>
-
-      <time
-        :timestamp="getCurrentDateFormatted(article.date)" >
-        {{ getFormattedDateFromTime(article.date) }}
-      </time>
-
-      <span class="point-sep">&#8212;</span>
-
-      <span class="article-readlength">
-        <span class="material-symbols-outlined">schedule</span>
-        <span>{{ getReadLengthText(article.content) }}</span>
-      </span>
-    </div>
+    <SingleArticleMeta 
+      :author="author"
+      :article-date="article.date"
+      :article-length="article.content.split(' ').length"
+    />
 
     <div class="article-wrapper-inner">
-      <div class="headings">
-        <span bold>Contents</span>
-        <hr class="hr-line">
-        <a v-for="heading in article.headings" :href="`#${heading.id}`" :class="`heading heading-level-${heading.level}`">
-          {{ heading.title }}
-        </a>
-
-        <span v-if="!exists(article.headings) || article.headings.length == 0">
-          {{ article.title }}
-        </span>
-      </div>
-
-      <div class="headings-mobile" v-if="exists(article.headings) && article.headings.length != 0">
-        <Dropdown style="display: block;">
-          <template #activator>
-            <DropdownActivator>
-              <button class="button-full button-headings">
-                <span class="material-symbols-outlined">toc</span>
-                View Contents
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-              </button>
-            </DropdownActivator>
-          </template>
-          <template #contents>
-            <DropdownContents>
-              <!-- <DropdownItem v-for="heading in article.headings">
-                <a :class="`heading-level-${heading.level}`" :href="`#${heading.id}`">{{ heading.title }}</a>
-              </DropdownItem> -->
-              <a :href="`#${heading.id}`" v-for="heading in article.headings">
-                <DropdownItem>
-                  <span :class="`heading-level-${heading.level}`">{{ heading.title }}</span>
-                </DropdownItem>
-              </a>
-            </DropdownContents>
-          </template>
-        </Dropdown>
-      </div>
+      <SingleArticleHeadings 
+        :article-headings="article.headings"
+        :article-title="article.title"
+      />
 
       <div class="article-content">
         <ArticleWrapperImage :imgUrl="article.imgUrl" />
@@ -219,37 +169,15 @@
         <div v-html="marked(article.content)"></div>
       </div>
 
-      <div class="article-share-wrapper">
-        <div class="article-share">
-          <div class="article-share-link">
-            <span class="material-symbols-outlined">share</span>
-          </div>
-          <div class="article-share-link">
-            <span class="article-share-link-instagram"></span>
-          </div>
-          <div class="article-share-link">
-            <span class="article-share-link-twitter"></span>
-          </div>
-          <div class="article-share-link">
-            <span class="article-share-link-facebook"></span>
-          </div>
-        </div>
-      </div>
+      <SingleArticleShare />
     </div>
 
     <br>
 
-    <SimpleContentWrapper>
-      <hr class="hr-line" />
-      <h3>More from {{ author.name }}</h3>
-      <div v-for="article in otherArticlesByAuthor">
-        <a :href="`/articles/${article.id}`">{{ article.title }}</a>
-      </div>
-      <br>
-      <h3>Latest Articles</h3>
-      <div v-for="article in latestArticles">
-        <a :href="`/articles/${article.id}`">{{ article.title }}</a>
-      </div>
-    </SimpleContentWrapper>
+    <SingleArticleMore 
+      :author="author"
+      :latest-articles="latestArticles"
+      :other-articles-by-author="otherArticlesByAuthor"
+    />
   </ArticleWrapperOuter>
 </template>
