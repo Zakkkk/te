@@ -1,7 +1,20 @@
 :root {
   --color-bg: #fcfcfc;
+  --color-bg-secondary: #f9f9f9;
   --color-fg: #111;
   --color-primary: #{$indigo};
+
+  --color-success-bg: #{lighten($green, 45%)};
+  --color-success-fg: #{darken($green, 40%)};
+  --color-success-border: #{$green};
+
+  --color-warning-bg: #{lighten($yellow, 45%)};
+  --color-warning-fg: #{darken($yellow, 40%)};
+  --color-warning-border: #{$yellow};
+
+  --color-danger-bg: #{lighten($red, 37%)};
+  --color-danger-fg: #{darken($red, 40%)};
+  --color-danger-border: #{$red};
 }
 
 body {

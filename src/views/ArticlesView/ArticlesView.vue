@@ -103,19 +103,19 @@ onMounted(async ()=>{
 
     <div class="articles-filters">
       <div class="button-group">
-        <button @click="setOrder(true)" :class="newestFirst == 1 ? 'button-active' : ''">
+        <button @click="setOrder(true)" :class="`button-small ${newestFirst == 1 ? 'button-active' : ''}`">
           Newest
         </button>
-        <button @click="setOrder(false)" :class="newestFirst == 0 ? 'button-active' : ''">
+        <button @click="setOrder(false)" :class="`button-small ${newestFirst == 0 ? 'button-active' : ''}`">
           Oldest
         </button>
       </div>
 
       <div class="button-group">
-        <button @click="setDensity(0)" :class="cardType == 0 ? 'button-active' : ''">
+        <button @click="setDensity(0)" :class="`button-small ${cardType == 0 ? 'button-active' : ''}`">
           <span class="material-symbols-outlined">view_day</span>
         </button>
-        <button @click="setDensity(1)" :class="cardType == 1 ? 'button-active' : ''">
+        <button @click="setDensity(1)" :class="`button-small ${cardType == 1 ? 'button-active' : ''}`">
           <span class="material-symbols-outlined">density_small</span>
         </button>
       </div>

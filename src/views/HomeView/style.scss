@@ -1,0 +1,15 @@
+@import '@/sf-scss/colors';
+
+.hero {
+  background: lighten($indigo, 30%);
+  text-align: center;
+  padding: 50px 0;
+  // color: #;
+
+  .hero-button-spacing {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -18,7 +18,6 @@
 
   import { ref, onMounted, onUnmounted, watch } from 'vue';
   import { useRoute, useRouter } from "vue-router";
-  import { RouterLink } from 'vue-router';
 
   const route = useRoute();
   const router = useRouter();
@@ -181,6 +180,7 @@
       <SingleArticleShare />
     </div>
 
+    <br>
     <br>
 
     <SingleArticleMore 

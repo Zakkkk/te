@@ -1,16 +1,14 @@
 <script setup>
   import "./Navbar.scss"
   import { RouterLink } from "vue-router";
-  import { ref, watchEffect, onMounted, TransitionGroup } from "vue";
+  import { ref } from "vue";
+
   import NavbarLink from "./NavbarLink.vue";
   import NavbarDropdown from "./NavbarDropdown.vue";
   import NavbarDropdownMobile from "./NavbarDropdownMobile.vue";
+  import NavbarDropdownMobileItem from './NavbarDropdownMobileItem.vue'
 
   const mobileNavActive = ref(false);
-
-  const { isMobile } = defineProps({
-    isMobile: false
-  })
 </script>
 
 <template>
@@ -25,9 +23,9 @@
         </RouterLink>
       </div>
 
-      <NavbarLink v-if="!isMobile" text="Articles" link-location="/articles" />
-      <NavbarLink v-if="!isMobile" text="Submit" link-location="/submit" />
-      <NavbarDropdown v-if="!isMobile" text="More">
+      <NavbarLink text="Articles" link-location="/articles" />
+      <NavbarLink text="Submit" link-location="/submit" />
+      <NavbarDropdown text="More">
         <NavbarLink text="Constitution" link-location="/constitution" />
         <NavbarLink text="Mission Statement" link-location="/mission" />
         <NavbarLink text="Donate" link-location="/mission" />
@@ -35,10 +33,10 @@
       </NavbarDropdown>
 
       <NavbarDropdownMobile :mobile-nav-active="mobileNavActive">
-        <NavbarLink text="Articles" link-location="/articles" />
-        <NavbarLink text="Submit" link-location="/submit" />
-        <NavbarLink text="Constitution" link-location="/constitution" />
-        <NavbarLink text="Mission Statement" link-location="/mission" />
+        <NavbarDropdownMobileItem text="Articles" link-location="/articles" />
+        <NavbarDropdownMobileItem text="Submit" link-location="/submit" />
+        <NavbarDropdownMobileItem text="Constitution" link-location="/constitution" />
+        <NavbarDropdownMobileItem text="Mission Statement" link-location="/mission" />
         <!-- <NavbarLink text="Donate" link-location="/mission" />
         <NavbarLink text="Meta" link-location="/mission" /> -->
       </NavbarDropdownMobile>

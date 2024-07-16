@@ -13,6 +13,7 @@ const props = defineProps({
 <template>
   <SimpleContentWrapper>
     <hr class="hr-line" />
+    <br>
     <h3>More from {{ author.name }}</h3>
     <SimpleArticleGallery 
       :articles="otherArticlesByAuthor" />

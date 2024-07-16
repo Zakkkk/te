@@ -10,9 +10,11 @@
 
 <style scoped lang="scss">
 @import '@/sf-scss/variables';
+@import '@/sf-scss/responsive';
 
 .navbar-item {
   display: flex;
+  @include responsive(1) { display: none; }
   align-items: center;
 
   a {
