@@ -2,6 +2,7 @@
   import { useRoute } from 'vue-router';
   
   import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
+  import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
 
   import { loadArticlesByAuthorId } from '@/api/LoadArticles';
   import { authors } from '@/assets/authors.json';
@@ -13,7 +14,7 @@
 
   const remaining = ref(1);
   let numberOfArticlesEvaluated = 0;
-  const newArticleAmountInCycle = 6; // for test
+  const newArticleAmountInCycle = 3; // for test
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -25,7 +26,6 @@
   }
 
   const author = matchAuthorFromId(authorId);
-
 
   async function loadArticleCycle() {
     // console.log('load cycle called');
@@ -54,10 +54,6 @@
 </script>
 
 <style lang="scss">
-.articles-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(1fr, 200px));
-}
 </style>
 
 <template>
@@ -68,13 +64,8 @@
     <h4>Latest Articles From {{ author.name }}</h4>
     <hr class="hr-line" />
     <!-- Gonna have an Article gallery here. -->
-    <div class="articles-wrapper">
-      <div v-for="article in articles" class="article">
-        <div class="article-title">
-          <RouterLink :to="`/articles/${article.id}`">{{ article.title }}</RouterLink>
-        </div>
-      </div>
-    </div>
+    <SimpleArticleGallery 
+      :articles="articles" />
     <button class="button-full" v-if="remaining != 0" @click="loadArticleCycle">loadArticleCycle()</button>
   </SimpleContentWrapper>
 </template>

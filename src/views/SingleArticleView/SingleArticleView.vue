@@ -11,12 +11,12 @@
   import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '@/api/LoadArticles.js';
   import exists from '@/util/exists.js';
   import { authors } from '@/assets/authors.json';
-  import { marked} from 'marked';
+  import { marked } from 'marked';
   import customHeadingId from "marked-custom-heading-id";
 
   import clamp from '@/util/clamp';
 
-  import { ref, onMounted, onUnmounted } from 'vue';
+  import { ref, onMounted, onUnmounted, watch } from 'vue';
   import { useRoute, useRouter } from "vue-router";
   import { RouterLink } from 'vue-router';
 
@@ -61,7 +61,10 @@
 
   marked.use(customHeadingId());
   
-  onMounted(async () => {
+  async function loadAllArticles() {
+    otherArticlesByAuthor.value = [];
+    latestArticles.value = [];
+
     function articleNotFound() {
       router.push('/articles/notfound');
     }
@@ -112,16 +115,22 @@
           });
       });
     });
+  }
+
+  onMounted(async () => {
+    loadAllArticles();
   });
 
-  function getReadLengthText(content) {
-    if (!exists(content))
-      return "";
-
-    const articleLength = Math.ceil(content.split(' ').length/180);
-
-    return `${articleLength} ${articleLength == 1 ? " minute" : " minutes"}`;
-  }
+  watch (
+    () => route.fullPath,
+    async newId => {
+      if(!newId.includes('#')) {
+        window.scroll(0,0); // bad workaround but idc
+      }
+      
+      loadAllArticles();
+    }
+  );
 
   function getScrollPercent() { // this is bad, because it isnt based on the article height but rather the page
     var h = document.documentElement, 

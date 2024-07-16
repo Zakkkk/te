@@ -13,9 +13,10 @@ const props = defineProps({
 
 .simple-article-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); // 295->220
+  grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
   gap: 25px;
   @include responsive(2) { gap: 16px }
+  @include responsive(1) { gap: 12px }
 }
 </style>
 

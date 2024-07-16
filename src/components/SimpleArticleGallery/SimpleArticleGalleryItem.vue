@@ -6,10 +6,11 @@ const props = defineProps({
   article: Object,
   author: Object,
 })
-
 </script>
 
 <style lang="scss" scoped>
+@import '@/sf-scss/responsive';
+
 .simple-article-gallery-item {
   color: var(--color-fg);
   display: flex;
@@ -19,6 +20,7 @@ const props = defineProps({
     img {
       width: 100%;
       aspect-ratio: 5 / 3;
+      @include responsive(1) { aspect-ratio: 2 / 1; }
       object-fit: cover;
     }
   }
