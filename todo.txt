@@ -1,20 +1,21 @@
-turn the date functions into a util
 fix mobile nav
-weird mobile nav going down 80% only
 Add meta data for each page
 Favicon visible on all backgrounds
+Home Page
 Contact page
 About page
 Privacy page
 Donate page
-separate stylesheet of navbar (among others)
 add a visual scroll bar to the left to show how much of the article is read (fix)
 inspo: https://honisoit.com/2024/05/sydney-law-school-cancels-july-intensives/
 caching posts (is it done automaticlly?)
 caching images/loading smaller images
 series functionality
 adding an autoload to the searchFilter
-separate fucking things out into components (esp share articl)
 put an entire article display on articlesview into a link
 weird scroll issues when changing articles.
 latest articles on singlearticleview loads more and also has a button to view more (kinda like youtube sidebar)
+trigger warnings
+make the list of articles look much nicer. / Fix descriptions of articles
+Should we always be using ArticlesList?
+make the share articles work
