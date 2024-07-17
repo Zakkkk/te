@@ -93,7 +93,9 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    window.scroll(0,0)
+    // if (!to.includes('#'))
+      window.scroll(0,0)
+
     // document.getElementById('app').scrollIntoView();
     // return savedPosition || { top: 0 };
   },

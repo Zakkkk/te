@@ -7,6 +7,7 @@ import ArticleListItem from './ArticleList/ArticleListItem.vue';
 import { authors } from '@/assets/authors.json';
 import cache from '@/util/cache.js';
 import exists from '@/util/exists.js';
+import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
 
 let defaultDisplayType = cache.get('displayType');
 
@@ -18,6 +19,7 @@ const newestFirst = ref(true);
 const searchFilter = ref("");
 
 const articles = ref([]);
+const sortedArticles = ref([]);
 const remaining = ref(1);
 
 let numberOfArticlesLoaded = 0; // this is also the index we will be loading articles from i think
@@ -46,13 +48,15 @@ async function loadArticleCycle() {
   // console.log(`will be loading from point ${numberOfArticlesLoaded}`)
 
   loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, null, !newestFirst.value).then(response => {
-    console.log(response)
-    
+    // console.log(response)
     articles.value.push(...response.articles);
+    sortedArticles.value.push(...response.articles);
 
     numberOfArticlesLoaded += response.articles.length;
 
     remaining.value = response.remaining;
+
+    onInputChange();
   });
 }
 
@@ -66,7 +70,15 @@ function getAuthorNameById(id) {
 }
 
 function onInputChange () {
-  
+  sortedArticles.value = [];
+
+  articles.value.forEach(article => {
+    if (article.title.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
+        article.content.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
+        getAuthorNameById(article.author).toLowerCase().includes(searchFilter.value.toLowerCase())) {
+      sortedArticles.value.push(article);
+    }
+  })
 }
 
 onMounted(async ()=>{
@@ -111,19 +123,18 @@ onMounted(async ()=>{
         </button>
       </div>
 
-      <div class="button-group">
+      <!-- <div class="button-group">
         <button @click="setDensity(0)" :class="`button-small ${cardType == 0 ? 'button-active' : ''}`">
           <span class="material-symbols-outlined">view_day</span>
         </button>
         <button @click="setDensity(1)" :class="`button-small ${cardType == 1 ? 'button-active' : ''}`">
           <span class="material-symbols-outlined">density_small</span>
         </button>
-      </div>
+      </div> -->
     </div>
-    <!-- <br> -->
-    <!-- <hr class="hr-line"/> -->
+    
     <br>
-    <ArticleList :displayType="cardType">
+    <!-- <ArticleList :displayType="cardType">
       <ArticleListItem
         v-for="article in articles"
 
@@ -138,7 +149,9 @@ onMounted(async ()=>{
         :description="article.content.slice(0,220)"
         :searchFilter="searchFilter"
       />
-    </ArticleList>
+    </ArticleList> -->
+    <SimpleArticleGallery
+      :articles="sortedArticles" />
     
     <div class="loadmore" v-if="remaining!=0">
       <button @click="loadArticleCycle()">More Articles</button>

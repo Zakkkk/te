@@ -14,6 +14,11 @@
       "id": 2,
       "name": "Matias",
       "biography": "This is Matias's biography"
+    },
+    {
+      "id": 3,
+      "name": "Chat GPT",
+      "biography": "I'm ChatGPT, a language model developed by OpenAI. I can assist with a variety of tasks, including answering questions, providing explanations, and generating content. I aim to be a helpful and informative assistant for your projects and inquiries."
     }
   ]
 }

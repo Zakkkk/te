@@ -13,12 +13,16 @@ const props = defineProps({
 <template>
   <SimpleContentWrapper>
     <hr class="hr-line" />
-    <br>
-    <h3>More from {{ author.name }}</h3>
-    <SimpleArticleGallery 
-      :articles="otherArticlesByAuthor" />
-    <br>
+    <div v-if="otherArticlesByAuthor.length != 0">
+      <br>
+      <h3>More from {{ author.name }}</h3>
+      <br>
+      <SimpleArticleGallery 
+        :articles="otherArticlesByAuthor" />
+      <br>
+    </div>
     <h3>Latest Articles</h3>
+    <br>
     <SimpleArticleGallery 
       :articles="latestArticles" />
   </SimpleContentWrapper>
