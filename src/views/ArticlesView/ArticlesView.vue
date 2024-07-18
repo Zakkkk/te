@@ -8,6 +8,8 @@ import { authors } from '@/assets/authors.json';
 import cache from '@/util/cache.js';
 import exists from '@/util/exists.js';
 import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
+import Dropdown from '@/components/Dropdown/Dropdown.vue';
+import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
 let defaultDisplayType = cache.get('displayType');
 
@@ -122,6 +124,20 @@ onMounted(async ()=>{
           Oldest
         </button>
       </div>
+
+      <Dropdown>
+        <template #activator>
+          <button class="button-small" style="display: flex; align-items: center;">
+            <!-- {{ newestFirst ? 'Newest' : 'Oldest' }} -->
+            Sort by
+            <span class="material-symbols-outlined">arrow_drop_down</span>
+          </button>
+        </template>
+        <template #contents>
+          <DropdownItem v-if="!newestFirst" @click="setOrder(true)">Newest</DropdownItem>
+          <DropdownItem v-if="newestFirst" @click="setOrder(false)">Oldest</DropdownItem>
+        </template>
+      </Dropdown>
 
       <!-- <div class="button-group">
         <button @click="setDensity(0)" :class="`button-small ${cardType == 0 ? 'button-active' : ''}`">

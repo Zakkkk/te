@@ -1,7 +1,5 @@
 <script setup>
 import Dropdown from '@/components/Dropdown/Dropdown.vue';
-import DropdownActivator from '@/components/Dropdown/DropdownActivator.vue';
-import DropdownContents from '@/components/Dropdown/DropdownContents.vue';
 import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
 import exists from '@/util/exists';
@@ -118,25 +116,21 @@ const props = defineProps({
   <div class="headings-mobile" v-if="exists(articleHeadings) && articleHeadings.length != 0">
     <Dropdown style="display: block;">
       <template #activator>
-        <DropdownActivator>
-          <button class="button-full button-headings">
-            <span class="material-symbols-outlined">toc</span>
-            View Contents
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-          </button>
-        </DropdownActivator>
+        <button class="button-full button-headings">
+          <span class="material-symbols-outlined">toc</span>
+          View Contents
+          <span class="material-symbols-outlined">arrow_drop_down</span>
+        </button>
       </template>
       <template #contents>
-        <DropdownContents>
-          <!-- <DropdownItem v-for="heading in articleHeadings">
-            <a :class="`heading-level-${heading.level}`" :href="`#${heading.id}`">{{ heading.title }}</a>
-          </DropdownItem> -->
-          <a :href="`#${heading.id}`" v-for="heading in articleHeadings">
-            <DropdownItem>
-              <span :class="`heading-level-${heading.level}`">{{ heading.title }}</span>
-            </DropdownItem>
-          </a>
-        </DropdownContents>
+        <!-- <DropdownItem v-for="heading in articleHeadings">
+          <a :class="`heading-level-${heading.level}`" :href="`#${heading.id}`">{{ heading.title }}</a>
+        </DropdownItem> -->
+        <a :href="`#${heading.id}`" v-for="heading in articleHeadings">
+          <DropdownItem>
+            <span :class="`heading-level-${heading.level}`">{{ heading.title }}</span>
+          </DropdownItem>
+        </a>
       </template>
     </Dropdown>
   </div>
