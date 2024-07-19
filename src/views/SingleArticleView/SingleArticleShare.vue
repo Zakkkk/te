@@ -1,5 +1,32 @@
 <script setup>
+import Popper from "vue3-popper";
 
+import { ref } from "vue";
+import copyTextToClipboard from '@/util/clipboard.js';
+
+const props = defineProps({
+  articleTitle: String,
+  authorName: String
+});
+
+const shareLinkPopper = ref(false);
+
+const handlePopperClick = () => {
+  copyTextToClipboard(window.location.href);
+  shareLinkPopper.value = true;
+  setTimeout(() => {
+    shareLinkPopper.value = false;
+  }, 1500);
+}
+
+const shareTwitter = () => {
+  const tweetText = encodeURIComponent(`
+    ${props.articleTitle} written by ${props.authorName}: ${window.location.href}
+  `.trim());
+  const twitterURL = `https://twitter.com/intent/tweet?text=${tweetText}`;
+
+  window.open(twitterURL, '_blank');
+}
 </script>
 
 <style lang="scss">
@@ -33,6 +60,13 @@
       filter: saturate(20%);
       @include responsive(1) { filter: saturate(100%); }
       transition: filter $sf-transition;
+
+      // Popper styles
+      --popper-theme-background-color: rgba(51,51,51,51);
+      --popper-theme-text-color: var(--color-bg);
+      --popper-theme-border-radius: 2px;
+      --popper-theme-padding: 0 6px;
+
       &:hover {
         opacity: 1;
         filter: saturate(100%);
@@ -75,12 +109,20 @@
   <div class="article-share-wrapper">
     <div class="article-share">
       <div class="article-share-link">
-        <span class="material-symbols-outlined">share</span>
+        <Popper 
+          content="Copied!" 
+          arrow 
+          placement="top" 
+          @click="handlePopperClick"
+          :show="shareLinkPopper">
+
+          <span class="material-symbols-outlined">share</span>
+        </Popper>
       </div>
-      <div class="article-share-link">
+      <!-- <div class="article-share-link">
         <span class="article-share-link-instagram"></span>
-      </div>
-      <div class="article-share-link">
+      </div> -->
+      <div class="article-share-link" @click="shareTwitter">
         <span class="article-share-link-twitter"></span>
       </div>
       <div class="article-share-link">

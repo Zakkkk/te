@@ -177,7 +177,10 @@
         <div v-html="marked(article.content)"></div>
       </div>
 
-      <SingleArticleShare />
+      <SingleArticleShare
+        :article-title="article.title"
+        :author-name="author.name"
+      />
     </div>
 
     <br>
