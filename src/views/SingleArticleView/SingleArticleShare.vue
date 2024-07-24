@@ -125,9 +125,9 @@ const shareTwitter = () => {
       <div class="article-share-link" @click="shareTwitter">
         <span class="article-share-link-twitter"></span>
       </div>
-      <div class="article-share-link">
+      <!-- <div class="article-share-link" @click="shareFacebook">
         <span class="article-share-link-facebook"></span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

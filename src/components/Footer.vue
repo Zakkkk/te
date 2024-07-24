@@ -17,7 +17,7 @@
           <span class="footer-link">TTE &copy;{{ new Date().getFullYear() }}</span>
         </div>
         <div class="footer-links-svg">
-          <a aria-label="instagram" class="footer-link footer-svg-instagram" href="https://www.instagram.com/thoughtexchange_/"></a>
+          <a target="_blank" aria-label="instagram" class="footer-link footer-svg-instagram" href="https://www.instagram.com/thoughtexchange_/"></a>
         </div>
       </div>
     </simple-content-wrapper>

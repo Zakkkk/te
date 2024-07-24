@@ -11,7 +11,7 @@
   const recentArticles = ref([]);
 
   onMounted(async () => {
-    loadArticles(3,0,null,false).then(response => {
+    loadArticles(6,0,null,false).then(response => {
       recentArticles.value.push(...response.articles);
     });
   });
@@ -34,6 +34,8 @@
   <br>
 
   <SimpleContentWrapper>
+    <h2>Recent Articles</h2>
+    <br>
     <SimpleArticleGallery :articles="recentArticles" />
   </SimpleContentWrapper>
 

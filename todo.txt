@@ -18,5 +18,4 @@ latest articles on singlearticleview loads more and also has a button to view mo
 trigger warnings
 make the list of articles look much nicer. / Fix descriptions of articles
 Should we always be using ArticlesList?
-make the share articles work
 consider separating the article content and meta data

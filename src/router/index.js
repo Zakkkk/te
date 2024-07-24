@@ -17,7 +17,7 @@ const routes = [
       metaTags: [
         {
           name: "og:title",
-          content: "The Thought Exchange"
+          content: "woo hoo"
         },
         {
           name: "og:image",
