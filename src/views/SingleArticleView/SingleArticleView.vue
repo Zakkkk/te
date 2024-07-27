@@ -18,6 +18,7 @@
 
   import { ref, onMounted, onUnmounted, watch } from 'vue';
   import { useRoute, useRouter } from "vue-router";
+import SingleArticleTrigger from './SingleArticleTrigger.vue';
 
   const route = useRoute();
   const router = useRouter();
@@ -123,9 +124,9 @@
   watch (
     () => route.fullPath,
     async newId => {
-      if(!newId.includes('#')) {
-        window.scroll(0,0); // bad workaround but idc
-      }
+      // if(!newId.includes('#')) {
+      //   // window.scroll(0,-1000); // bad workaround but idc
+      // }
       
       loadAllArticles();
     }
@@ -163,6 +164,10 @@
       :author="author"
       :article-date="article.date"
       :article-length="article.content.split(' ').length"
+    />
+
+    <SingleArticleTrigger
+      :triggers="exists(article.triggers) ? article.triggers : []"
     />
 
     <div class="article-wrapper-inner">

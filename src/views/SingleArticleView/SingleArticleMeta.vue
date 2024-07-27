@@ -20,7 +20,7 @@ function getReadLengthText(length) {
 
 <style scoped lang="scss">
 .meta-wrapper {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   display: flex;
   column-gap: 5px;
   font-size: 0.95rem;

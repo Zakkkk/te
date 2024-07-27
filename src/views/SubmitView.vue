@@ -8,7 +8,7 @@
     <h1>Submit a Post</h1>
     <p>Do you want to submit a post to The Thought Exchange?</p>
     <br>
-    <p bold>Fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScbaxEDeF8SMTv839MY6eo1oeeG6pvpxOS0NBGcqrbjhHv8Og/viewform?usp=sf_link">this form</a>.
+    <p bold>Fill out <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScbaxEDeF8SMTv839MY6eo1oeeG6pvpxOS0NBGcqrbjhHv8Og/viewform?usp=sf_link">this form</a>.
     </p>
     <br>
     <p>Before you begin writing your submission, it is important to read through our <RouterLink to="/constitution">Constitution</RouterLink>, which defines all our rules regarding posting. This page outlines general suggestions on how to write a good post.</p>

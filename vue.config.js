@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/tte-dist/" : "/",
+  // publicPath: process.env.NODE_ENV === "production" ? "/tte-dist/" : "/",
   // a test
 
   chainWebpack: config => {

@@ -93,8 +93,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    // if (!to.includes('#'))
+    if (!window.location.href.includes('#'))
       window.scroll(0,0)
+
+    // if we use the routing of the # then we need to change this
 
     // document.getElementById('app').scrollIntoView();
     // return savedPosition || { top: 0 };

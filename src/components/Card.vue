@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-title">
+    <div class="card-title" v-if="exists(title)">
       {{ title }}
     </div>
     <div class="card-contents">
@@ -46,8 +46,10 @@
 </style>
 
 <script setup>
-  const props = defineProps({
-    title: String
-    // Maybe eventually include a canClose prop
+import exists from '@/util/exists';
+
+const props = defineProps({
+  title: String
+  // Maybe eventually include a canClose prop
   })
 </script>

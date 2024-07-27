@@ -16,6 +16,12 @@ put an entire article display on articlesview into a link
 weird scroll issues when changing articles.
 latest articles on singlearticleview loads more and also has a button to view more (kinda like youtube sidebar)
 trigger warnings
+
 make the list of articles look much nicer. / Fix descriptions of articles
+  - Now using the hook + I think it looks nice
+
 Should we always be using ArticlesList?
+  - No we use SimpleArticleGallery
+
 consider separating the article content and meta data
+  - probably wont bother with this for a while, not enough articles for it to make a meaningful difference.
