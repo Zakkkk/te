@@ -66,6 +66,6 @@
     <!-- Gonna have an Article gallery here. -->
     <SimpleArticleGallery 
       :articles="articles" />
-    <button class="button-full" v-if="remaining != 0" @click="loadArticleCycle">loadArticleCycle()</button>
+    <button v-if="remaining != 0" @click="loadArticleCycle">Load more articles</button>
   </SimpleContentWrapper>
 </template>

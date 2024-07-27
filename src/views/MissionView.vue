@@ -27,27 +27,23 @@ p {
       <h1>Our Mission Statement</h1>
       
       <p>
-        As a group of interested, excited and passionate young people, we have a lot of views, opinions and insights that we'd love to share. We believe that this can only mean that other have this same desire, to express their feelings about the world. The problem comes in sharing this viewpoint with others, as there seems to be no space for us to express our viewpoint. Thus, we created the Thought Exchange, a place where we could express our thoughts, feelings and opinions on the world around us, as well as hear what others care deeply about.
+        Our mission is to create a platform for the sharing of previously underappreciated perspectives. We see our social and digital media landscape become increasingly polarised and exclusive. Not only with the echo chambers of mainstream social media, but also with increased paywalls. Further, most people cannot contribute to the civil discussion in widely read newspapers, and thus their voices are underheard. Our society functions on a platform of discussion, but we do not actually discuss, at least not with those who disagree with us.
       </p>
 
       <p>
-        We care about the importance of discussion. The ability and right to have a viewpoint, share it, discuss it, and find people who can respectfully disagree. Unfortunately, in the internet age, or perhaps forever, it has become almost impossible to discuss important issues in a civilised manner that fosters useful solutions, so that is what The Thought Exchange is all about, a place that fosters ever important discussion about society, politics, economics and art. We are a welcoming platform that allows for constructive discussion about those issues that society cares, or should care about.
+        We are an online moderated forum that allows previously underappreciated perspectives to be shared in the form of opinion pieces. Anyone can share their essays with us, and have their work published for others to read. We commit to creating a place for the comfortable sharing of ideas, with guidelines that foster discussion and not division.
       </p>
 
       <p>
-        Division is the scariest threat to our society, worse than climate change, nuclear warfare or artificial intelligence. It corrodes and splits our society into ever increasingly different groups, all of which exist in their own echo chambers, constantly reaffirming themselves that the enemy, those who are not in the group, are a reincarnation of the devil. In reality these people are other humans, with their own set of beliefs, biases and things that they care about. The devil is division, not other humans. And division impedes on our ability to progress, in whatever direction that might take. The Thought Exchange challenges this division. It is for this reason we do two things.
+        We commit to being completely apolitical, which means that all sides of the political spectrum are not only welcome, but encouraged onto our platform. In fact, our platform only works if everyone not only reads, but also comments, publishes and moderates our platform.
       </p>
 
-      <ol>
-        <li>
-          As an organisation we are apolitical. This allows our platform to mediate discussion across the political spectrum. We commit to never affiliating ourselves with any political party, nor any politically aligned institution.
-        </li>
-        <li>
-          We commit to challenging biases. Our contributors will be challenged to disclose any relevant biases, those being social, financial or political. A bias does not discredit an opinion, but it can provide insight into how an individual has reached their particular point of view.
-        </li>
-      </ol>
+      <p>
+        We also commit to being as unbiased as possible. Our platform is an entity without preconceived notions or beliefs. It is a place that allows others to share and discuss, without intruding unless absolutely necessary. We achieve this through careful moderation outlined in our constitution. Any moderation must be referred to the constitution, meaning users know the metrics of moderation. We welcome any criticism of our constitution, and are always open to changing it if we deem it necessary.
+      </p>
     </div>
 
+    <br>
     <br>
 
     <h6 class="sign-off">&#8212; The Thought Exchange Team</h6>
