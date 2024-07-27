@@ -1,14 +1,14 @@
 <script setup>
-  import "./Navbar.scss"
-  import { RouterLink } from "vue-router";
-  import { ref } from "vue";
+import "./Navbar.scss"
+import { RouterLink } from "vue-router";
+import { ref } from "vue";
 
-  import NavbarLink from "./NavbarLink.vue";
-  import NavbarDropdown from "./NavbarDropdown.vue";
-  import NavbarDropdownMobile from "./NavbarDropdownMobile.vue";
-  import NavbarDropdownMobileItem from './NavbarDropdownMobileItem.vue'
+import NavbarLink from "./NavbarLink.vue";
+import NavbarDropdown from "./NavbarDropdown.vue";
+import NavbarDropdownMobile from "./NavbarDropdownMobile.vue";
+import NavbarDropdownMobileItem from './NavbarDropdownMobileItem.vue'
 
-  const mobileNavActive = ref(false);
+const mobileNavActive = ref(false);
 </script>
 
 <template>
@@ -29,7 +29,7 @@
         <NavbarLink text="Constitution" link-location="/constitution" />
         <NavbarLink text="Mission Statement" link-location="/mission" />
         <NavbarLink text="Donate" link-location="/donate" />
-        <NavbarLink text="Meta" link-location="/mission" />
+        <!-- <NavbarLink text="Meta" link-location="/mission" /> -->
       </NavbarDropdown>
 
       <NavbarDropdownMobile>

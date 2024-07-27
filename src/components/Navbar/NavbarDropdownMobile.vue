@@ -46,7 +46,7 @@ const navToggle = () => {
       align-items: center;
 
       position: fixed;
-      z-index: -1;
+      z-index: 9;
       overflow: scroll;
       top: 0;
       left: 0;
@@ -58,13 +58,13 @@ const navToggle = () => {
       box-shadow: -40px 0 0px 0px rgba(0,0,0,0.5);
       opacity: 0;
       margin-left: calc(100vw);
-      transition: opacity $sf-transition-fast,
-                  margin-left $sf-transition-fast;
+      transition: opacity $sf-transition,
+                  margin-left $sf-transition;
                   // box-shadow $sf-transition;
 
       &.nav-mobile-dropdown-active {
-        transition: opacity $sf-transition-fast,
-                    margin-left $sf-transition-fast;
+        transition: opacity $sf-transition,
+                    margin-left $sf-transition;
         z-index: 9;
         margin-left: 0;
         // box-shadow: 0;
