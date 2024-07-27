@@ -45,7 +45,7 @@ onMounted(async () => {
         <div class="col-6">
           <h2>Why do we exist?</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae voluptas optio harum quaerat vel hic consectetur eligendi aliquid quisquam molestiae quis saepe, eaque velit placeat corporis.
+            We exist to provide a platform for open and civil discussion.
           </p>
           <br>
           <RouterLink bold to='/mission'>Read Our Mission Statement</RouterLink>
@@ -53,10 +53,16 @@ onMounted(async () => {
         <div class="col-6 sf-grid-end-item">
           <h2>Who are we?</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id soluta, accusantium, odio itaque tempore ipsa porro expedita fugiat deleniti culpa harum. Sequi est non, beatae dolor voluptatibus, atque natus pariatur expedita voluptas error dolorem eligendi totam magnam deleniti architecto exercitationem, vero cupiditate! Optio quidem nobis sequi rem odit incidunt qui.
+            As an organisation we are apolitical and unbiased.
           </p>
         </div>
       </div>
     </SimpleContentWrapper>
   </div>
+  <br>
+  <SimpleContentWrapper>
+    <h3>Submit your own article</h3>
+    <p>We'd love to hear your unique perspectives.</p>
+    <p>Please visit <RouterLink to="/submit">this page</RouterLink> to learn more.</p>
+  </SimpleContentWrapper>
 </template>

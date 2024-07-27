@@ -1,15 +1,22 @@
-fix mobile nav
+series functionality
+
+onInputChange sorts everything to see how many are sorted so 2x amount of work (possible server side fix)
+
 Add meta data for each page
 
+fix numbering in constitution
+
+On full launch:
+  -fix the submit page with the posts we love
+  - 404.html should be the same as index.html
+
+------------------
 add a visual scroll bar to the left to show how much of the article is read
   - fix/maybe
 
 caching images/loading smaller images
   - already done automatically i think
 
-series functionality
-
-onInputChange sorts everything to see how many are sorted so 2x amount of work (possible server side fix)
 
 weird scroll issues when changing articles. (idk how to fix :( )
 
