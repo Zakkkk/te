@@ -28,7 +28,7 @@
       <NavbarDropdown text="More">
         <NavbarLink text="Constitution" link-location="/constitution" />
         <NavbarLink text="Mission Statement" link-location="/mission" />
-        <NavbarLink text="Donate" link-location="/mission" />
+        <NavbarLink text="Donate" link-location="/donate" />
         <NavbarLink text="Meta" link-location="/mission" />
       </NavbarDropdown>
 
@@ -38,8 +38,8 @@
         <NavbarDropdownMobileItem text="Submit" link-location="/submit" />
         <NavbarDropdownMobileItem text="Constitution" link-location="/constitution" />
         <NavbarDropdownMobileItem text="Mission Statement" link-location="/mission" />
-        <!-- <NavbarLink text="Donate" link-location="/mission" />
-        <NavbarLink text="Meta" link-location="/mission" /> -->
+        <NavbarDropdownMobileItem text="Donate" link-location="/donate" />
+        <!--<NavbarLink text="Meta" link-location="/mission" /> -->
       </NavbarDropdownMobile>
     </div>
   </nav>

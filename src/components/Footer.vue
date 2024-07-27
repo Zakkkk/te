@@ -13,7 +13,7 @@
           <router-link to="/" class="footer-link">privacy</router-link>
           <!-- privacy policy ^ -->
           <a href="/sitemap.xml" class="footer-link">site map</a>
-          <router-link to="/" class="footer-link footer-rainbow">donate</router-link>
+          <router-link to="/donate" class="footer-link footer-rainbow">donate</router-link>
           <span class="footer-link">TTE &copy;{{ new Date().getFullYear() }}</span>
         </div>
         <div class="footer-links-svg">

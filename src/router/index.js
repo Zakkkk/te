@@ -6,6 +6,7 @@ import ConstitutionView from '@/views/ConstitutionView.vue';
 import MissionView from '@/views/MissionView.vue';
 import ContactView from '@/views/ContactView.vue';
 import ArticleNotFoundView from '@/views/ArticleNotFoundView.vue';
+import DonateView from '@/views/DonateView.vue';
 
 const routes = [
   {
@@ -13,17 +14,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: {
-      title: 'The Thought Exchange',
-      metaTags: [
-        {
-          name: "og:title",
-          content: "woo hoo"
-        },
-        {
-          name: "og:image",
-          content: ""
-        }
-      ]
+      title: 'The Thought Exchange'
     }
   },
   {
@@ -31,12 +22,6 @@ const routes = [
     name: 'articles',
     meta: {
       title: 'All Articles On The Thought Exchange',
-      metaTags: [
-        {
-          name: "description",
-          content: "All the articles on The Thought Exchange. Filter through articles or adjust search filters."
-        }
-      ]
     },
     component: () => import('@/views/ArticlesView/ArticlesView.vue')
   },
@@ -85,6 +70,14 @@ const routes = [
     component: ContactView,
     meta: {
       title: 'Contact us | The Thought Exchange'
+    }
+  },
+  {
+    path: '/donate',
+    name: 'donate',
+    component: DonateView,
+    meta: {
+      title: 'Donate | The Thought Exchange'
     }
   },
 ];

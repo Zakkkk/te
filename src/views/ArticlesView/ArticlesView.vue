@@ -11,26 +11,25 @@ import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticl
 // import Dropdown from '@/components/Dropdown/Dropdown.vue';
 // import DropdownItem from '@/components/Dropdown/DropdownItem.vue';
 
-let defaultDisplayType = cache.get('displayType');
+// let defaultDisplayType = cache.get('displayType');
 
-if (!exists(defaultDisplayType))
-  defaultDisplayType = 0;
+// if (!exists(defaultDisplayType))
+//   defaultDisplayType = 0;
 
-const cardType = ref(defaultDisplayType); // 0 = card, 1 = dense
+// const cardType = ref(defaultDisplayType); // 0 = card, 1 = dense
 const newestFirst = ref(true);
 const searchFilter = ref("");
 
 const articles = ref([]);
-const sortedArticles = ref([]);
 const remaining = ref(1);
 
 let numberOfArticlesLoaded = 0; // this is also the index we will be loading articles from i think
 const newArticleAmountInCycle = 6; // gonna change to 12 later or maybe more
 
-function setDensity(density) {
-  cardType.value = density;
-  cache.set('displayType', density);
-}
+// function setDensity(density) {
+//   cardType.value = density;
+//   cache.set('displayType', density);
+// }
 
 function setOrder(order) {
   if (newestFirst.value == order) return;
@@ -52,13 +51,11 @@ async function loadArticleCycle() {
   loadArticles(newArticleAmountInCycle, numberOfArticlesLoaded, null, !newestFirst.value).then(response => {
     // console.log(response)
     articles.value.push(...response.articles);
-    sortedArticles.value.push(...response.articles);
 
     numberOfArticlesLoaded += response.articles.length;
 
     remaining.value = response.remaining;
 
-    onInputChange();
   });
 }
 
@@ -71,16 +68,21 @@ function getAuthorNameById(id) {
   return `author #${id} not found`;
 }
 
-function onInputChange () {
-  sortedArticles.value = [];
+function isArticleFiltered(article) {
+  return article.title.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
+         article.content.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
+         getAuthorNameById(article.author).toLowerCase().includes(searchFilter.value.toLowerCase())
+}
 
-  articles.value.forEach(article => {
-    if (article.title.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
-        article.content.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
-        getAuthorNameById(article.author).toLowerCase().includes(searchFilter.value.toLowerCase())) {
-      sortedArticles.value.push(article);
-    }
-  })
+function onInputChange () {
+  if (
+    articles.value.filter(article => isArticleFiltered(article)).length < newArticleAmountInCycle && // not a good fix
+    remaining.value > 0
+  ) {
+    loadArticleCycle().then(_ => {
+
+    });
+  }
 }
 
 onMounted(async ()=>{
@@ -167,7 +169,7 @@ onMounted(async ()=>{
       />
     </ArticleList> -->
     <SimpleArticleGallery
-      :articles="sortedArticles" />
+      :articles="articles.filter(article => isArticleFiltered(article))" />
     
     <div class="loadmore" v-if="remaining!=0">
       <button @click="loadArticleCycle()">More Articles</button>

@@ -2,7 +2,7 @@
 import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
 </script>
 
-<style>
+<style scoped>
 .taller {
   min-height: 75vh;
 }

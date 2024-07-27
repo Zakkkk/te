@@ -7,6 +7,7 @@
   import SingleArticleShare from './SingleArticleShare.vue';
   import SingleArticleMeta from './SingleArticleMeta.vue';
   import SingleArticleHeadings from './SingleArticleHeadings.vue';
+  import SingleArticleTrigger from './SingleArticleTrigger.vue';
 
   import { loadArticleById, loadArticlesByAuthorId, loadArticles } from '@/api/LoadArticles.js';
   import exists from '@/util/exists.js';
@@ -18,7 +19,6 @@
 
   import { ref, onMounted, onUnmounted, watch } from 'vue';
   import { useRoute, useRouter } from "vue-router";
-import SingleArticleTrigger from './SingleArticleTrigger.vue';
 
   const route = useRoute();
   const router = useRouter();
@@ -37,6 +37,7 @@ import SingleArticleTrigger from './SingleArticleTrigger.vue';
 
   const otherArticlesByAuthor = ref([]);
   const latestArticles = ref([]);
+  const articleContentRef = ref(null);
 
   const matchAuthorFromId = id => {
     for (let i = 0; i < authors.length; i++) {
@@ -99,7 +100,7 @@ import SingleArticleTrigger from './SingleArticleTrigger.vue';
           });
       })
 
-      loadArticles(3, 0, null, false).then(response => {
+      loadArticles(6, 0, null, false).then(response => {
         response.articles.forEach(latestArticle => {
           if (latestArticle.id == article.value.id) {
             needToLoadOneMoreArticleLatest = true;
@@ -125,32 +126,30 @@ import SingleArticleTrigger from './SingleArticleTrigger.vue';
     () => route.fullPath,
     async newId => {
       // if(!newId.includes('#')) {
-      //   // window.scroll(0,-1000); // bad workaround but idc
+      //   // document.getElementById('topnav').scrollIntoView();
       // }
       
+      console.log(window.scroll)
       loadAllArticles();
     }
   );
 
-  function getScrollPercent() { // this is bad, because it isnt based on the article height but rather the page
-    var h = document.documentElement, 
-        b = document.body,
-        st = 'scrollTop',
-        sh = 'scrollHeight';
-    return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
-  }
+  // function getScrollPercent() { // this is bad, because it isnt based on the article height but rather the page
+  //   // return 100*clamp((4235.85 - articleContentRef.value.getBoundingClientRect().bottom)/4235.85, 0, 1);
+  //   return 0;
+  // }
 
-  function onScroll () {
-    progress.value = getScrollPercent();
-  }
+  // function onScroll () {
+  //   progress.value = getScrollPercent();
+  // }
 
-  onMounted(() => {
-    document.addEventListener('scroll', onScroll);
-  });
+  // onMounted(() => {
+  //   document.addEventListener('scroll', onScroll);
+  // });
 
-  onUnmounted(() => {
-    document.removeEventListener('scroll', onScroll);
-  });
+  // onUnmounted(() => {
+  //   document.removeEventListener('scroll', onScroll);
+  // });
 </script>
 
 <template>
@@ -176,7 +175,7 @@ import SingleArticleTrigger from './SingleArticleTrigger.vue';
         :article-title="article.title"
       />
 
-      <div class="article-content">
+      <div ref="articleContentRef" class="article-content">
         <ArticleWrapperImage :imgUrl="article.imgUrl" />
         <p class="author-biography">{{ author.biography }}</p>
         <div v-html="marked(article.content)"></div>

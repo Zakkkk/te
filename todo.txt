@@ -6,16 +6,16 @@ Contact page
 About page
 Privacy page
 Donate page
+
 add a visual scroll bar to the left to show how much of the article is read (fix)
-inspo: https://honisoit.com/2024/05/sydney-law-school-cancels-july-intensives/
-caching posts (is it done automaticlly?)
-caching images/loading smaller images
+
+caching images/loading smaller images (already done automatically i think)
+
 series functionality
-adding an autoload to the searchFilter
-put an entire article display on articlesview into a link
-weird scroll issues when changing articles.
-latest articles on singlearticleview loads more and also has a button to view more (kinda like youtube sidebar)
-trigger warnings
+
+onInputChange sorts everything to see how many are sorted so 2x amount of work (possible server side fix)
+
+weird scroll issues when changing articles. (idk how to fix :( )
 
 make the list of articles look much nicer. / Fix descriptions of articles
   - Now using the hook + I think it looks nice
