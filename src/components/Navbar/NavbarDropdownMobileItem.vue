@@ -7,7 +7,7 @@ const props = defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss"> // not scoped because navbardropdownmobile usees this class for close
 .nav-mobile-dropdown-item {
   a {
     text-align: center;

@@ -32,7 +32,7 @@
         <NavbarLink text="Meta" link-location="/mission" />
       </NavbarDropdown>
 
-      <NavbarDropdownMobile :mobile-nav-active="mobileNavActive">
+      <NavbarDropdownMobile>
         <NavbarDropdownMobileItem text="Home" link-location="/" />
         <NavbarDropdownMobileItem text="Articles" link-location="/articles" />
         <NavbarDropdownMobileItem text="Submit" link-location="/submit" />

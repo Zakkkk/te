@@ -1,15 +1,11 @@
 fix mobile nav
 Add meta data for each page
-Favicon visible on all backgrounds
-Home Page
-Contact page
-About page
-Privacy page
-Donate page
 
-add a visual scroll bar to the left to show how much of the article is read (fix)
+add a visual scroll bar to the left to show how much of the article is read
+  - fix/maybe
 
-caching images/loading smaller images (already done automatically i think)
+caching images/loading smaller images
+  - already done automatically i think
 
 series functionality
 

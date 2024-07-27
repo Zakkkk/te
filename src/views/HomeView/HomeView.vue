@@ -1,20 +1,20 @@
 <script setup>
-  import './style.scss';
+import './style.scss';
 
-  import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
-  import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
+import SimpleContentWrapper from '@/components/SimpleContentWrapper.vue';
+import SimpleArticleGallery from '@/components/SimpleArticleGallery/SimpleArticleGallery.vue';
 
-  import { loadArticles } from '@/api/LoadArticles';
+import { loadArticles } from '@/api/LoadArticles';
 
-  import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
-  const recentArticles = ref([]);
+const recentArticles = ref([]);
 
-  onMounted(async () => {
-    loadArticles(6,0,null,false).then(response => {
-      recentArticles.value.push(...response.articles);
-    });
+onMounted(async () => {
+  loadArticles(6,0,null,false).then(response => {
+    recentArticles.value.push(...response.articles);
   });
+});
 </script>
 
 <template>

@@ -1,11 +1,12 @@
 <script setup>
-  import { ref } from 'vue';
+import { ref } from 'vue';
+import NavbarDropdownMobileItem from './NavbarDropdownMobileItem.vue';
 
-  const isOpen = ref(false);
+const isOpen = ref(false);
 
-  const navToggle = () => {
-    isOpen.value = !isOpen.value;
-  }
+const navToggle = () => {
+  isOpen.value = !isOpen.value;
+}
 </script>
 
 <style lang="scss">
@@ -14,13 +15,13 @@
 
 @include responsive(1) {
   .nav-mobile-dropdown-wrapper {
-    display: block;
     position: absolute;
     right: 0;
+    left: 0;
 
-    .nav-mobile-dropdown-activator {
-      cursor: pointer;
+    display: flex;
 
+    [class*='nav-mobile-dropdown-icon-'] {
       > span {
         display: flex;
         align-items: center;
@@ -29,6 +30,17 @@
         user-select: none;
       }
     }
+
+    .nav-mobile-dropdown-icon-left {
+      cursor: pointer; // not really needed on mobile lol
+      margin-right: auto;
+    }
+
+    .nav-mobile-dropdown-icon-right {
+      cursor: pointer;
+      margin-left: auto;
+    }
+    
     .nav-mobile-dropdown-content {
       display: flex;
       align-items: center;
@@ -46,16 +58,16 @@
       box-shadow: -40px 0 0px 0px rgba(0,0,0,0.5);
       opacity: 0;
       margin-left: calc(100vw);
-      transition: opacity $sf-transition,
-                  margin-left $sf-transition;
+      transition: opacity $sf-transition-fast,
+                  margin-left $sf-transition-fast;
                   // box-shadow $sf-transition;
 
       &.nav-mobile-dropdown-active {
-        transition: opacity $sf-transition,
-                    margin-left $sf-transition;
+        transition: opacity $sf-transition-fast,
+                    margin-left $sf-transition-fast;
         z-index: 9;
         margin-left: 0;
-        box-shadow: 0;
+        // box-shadow: 0;
         // display:block;
         opacity: 1;
       }
@@ -70,7 +82,13 @@
 
 <template>
   <div class="nav-mobile-dropdown-wrapper">
-    <div class="nav-mobile-dropdown-activator" @click="navToggle">
+    <RouterLink to="/articles" class="nav-mobile-dropdown-icon-left">
+      <span class="material-symbols-outlined">
+        newspaper
+      </span>
+    </RouterLink>
+
+    <div class="nav-mobile-dropdown-icon-right" @click="navToggle">
       <span class="material-symbols-outlined">
         {{ isOpen ? 'close' : 'menu' }}
       </span>
@@ -80,6 +98,9 @@
       :class="`nav-mobile-dropdown-content ${isOpen?'nav-mobile-dropdown-active':''}`"
       @click="isOpen=false" >
       <div class="nav-mobile-dropdown-content-wrapper">
+        <div class="nav-mobile-dropdown-item">
+          <a @click="navToggle" class="nav-mobile-dropdown-item"><span class="material-symbols-outlined">close</span></a>
+        </div>
         <slot></slot>
       </div>
     </div>

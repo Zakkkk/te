@@ -9,8 +9,7 @@
       <div class="footer-content">
         <div class="footer-links">
           <router-link to="/contact" class="footer-link">contact</router-link>
-          <router-link to="/" class="footer-link">about</router-link>
-          <router-link to="/" class="footer-link">privacy</router-link>
+          <router-link to="/privacy" class="footer-link">privacy</router-link>
           <!-- privacy policy ^ -->
           <a href="/sitemap.xml" class="footer-link">site map</a>
           <router-link to="/donate" class="footer-link footer-rainbow">donate</router-link>

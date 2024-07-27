@@ -7,6 +7,7 @@ import MissionView from '@/views/MissionView.vue';
 import ContactView from '@/views/ContactView.vue';
 import ArticleNotFoundView from '@/views/ArticleNotFoundView.vue';
 import DonateView from '@/views/DonateView.vue';
+import PrivacyView from '@/views/PrivacyView.vue';
 
 const routes = [
   {
@@ -78,6 +79,14 @@ const routes = [
     component: DonateView,
     meta: {
       title: 'Donate | The Thought Exchange'
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: PrivacyView,
+    meta: {
+      title: 'Your Privacy | The Thought Exchange'
     }
   },
 ];
