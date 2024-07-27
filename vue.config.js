@@ -1,7 +1,4 @@
 module.exports = {
-  // publicPath: process.env.NODE_ENV === "production" ? "/tte-dist/" : "/",
-  // a test
-
   chainWebpack: config => {
     config.module
       .rule('yaml')
