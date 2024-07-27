@@ -72,7 +72,13 @@
       font-size:0.95rem;
     }
 
-    .nav-mobile-dropdown-wrapper { display: none; }
+    @include responsive(3) {
+      .nav-mobile-dropdown-wrapper { display: none; }
+    }
+    
+    @include responsive(2) {
+      .nav-mobile-dropdown-wrapper { display: none; }
+    }
 
     @include responsive(1) {
       width: 90%;

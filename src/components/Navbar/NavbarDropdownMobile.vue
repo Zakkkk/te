@@ -8,7 +8,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/sf-scss/responsive';
 @import '@/sf-scss/colors';
 
@@ -37,8 +37,10 @@
       z-index: -1;
       overflow: scroll;
       top: 0;
-      left:40px; // this 40 is important(ish) because it is referenced in the box shadow
+      left: 0;
+      // left:40px; // this 40 is important(ish) because it is referenced in the box shadow
       right:0;
+      bottom: 0;
       background: var(--color-bg);
       border-left: 1px solid $lgrey-3;
       box-shadow: -40px 0 0px 0px rgba(0,0,0,0.5);
@@ -75,7 +77,8 @@
     </div>
 
     <div
-      :class="`nav-mobile-dropdown-content ${isOpen?'nav-mobile-dropdown-active':''}`">
+      :class="`nav-mobile-dropdown-content ${isOpen?'nav-mobile-dropdown-active':''}`"
+      @click="isOpen=false" >
       <div class="nav-mobile-dropdown-content-wrapper">
         <slot></slot>
       </div>

@@ -33,6 +33,7 @@
       </NavbarDropdown>
 
       <NavbarDropdownMobile :mobile-nav-active="mobileNavActive">
+        <NavbarDropdownMobileItem text="Home" link-location="/" />
         <NavbarDropdownMobileItem text="Articles" link-location="/articles" />
         <NavbarDropdownMobileItem text="Submit" link-location="/submit" />
         <NavbarDropdownMobileItem text="Constitution" link-location="/constitution" />
