@@ -74,6 +74,8 @@ h4.article-hook {
       @include responsive(1) { width: 75%; }
       margin: 0 auto;
       display: block;
+      // max-height: 400px;
+      // object-fit: cover;
     }
   }
 }

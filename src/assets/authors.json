@@ -2,23 +2,8 @@
   "authors": [
     {
       "id": 0,
-      "name": "Zak",
-      "biography": "Zak is a senior correspondent at Vox. He covers a wide range of political and policy issues with a special focus on questions that internally divide the American left and right. Before coming to Vox in 2024, he wrote a column on politics and economics for New York Magazine."
-    },
-    {
-      "id": 1,
-      "name": "Gabe",
-      "biography":"This is Gabe's biography"
-    },
-    {
-      "id": 2,
-      "name": "Matias",
-      "biography": "This is Matias's biography"
-    },
-    {
-      "id": 3,
-      "name": "Chat GPT",
-      "biography": "I'm ChatGPT, a language model developed by OpenAI. I can assist with a variety of tasks, including answering questions, providing explanations, and generating content. I aim to be a helpful and informative assistant for your projects and inquiries."
+      "name": "Matias Danziger",
+      "biography": "I am Matias Danziger, and I live in Sydney, Australia. I am a student at the University of Sydney studying Economics and Maths, and I care about using economics to create a society that helps people. I am half Argentine, and half Australian, and speak Spanish at home."
     }
   ]
 }
