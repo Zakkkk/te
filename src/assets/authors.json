@@ -3,7 +3,16 @@
     {
       "id": 0,
       "name": "Matias Danziger",
-      "biography": "I am Matias Danziger, and I live in Sydney, Australia. I am a student at the University of Sydney studying Economics and Maths, and I care about using economics to create a society that helps people. I am half Argentine, and half Australian, and speak Spanish at home."
+      "biography": "I am Matias Danziger, and I live in Sydney, Australia. I am a student at the University of Sydney studying Economics and Maths, and I care about using economics to create a society that helps people. I am half Argentine, and half Australian, and speak Spanish at home.",
+      "badges": [
+        0
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Zak",
+      "biography": "bio",
+      "badges": []
     }
   ]
 }

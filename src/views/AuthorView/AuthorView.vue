@@ -8,6 +8,8 @@
   import { authors } from '@/assets/authors.json';
   import { onMounted, ref } from 'vue';
 
+  import Popper from "vue3-popper";
+
   const route = useRoute();
   const articles = ref([]);
   const authorId = route.params.authorId;
@@ -53,12 +55,36 @@
   })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.author-badges {
+  --popper-theme-background-color: rgba(51,51,51,51);
+  --popper-theme-text-color: var(--color-bg);
+  --popper-theme-border-radius: 2px;
+  --popper-theme-padding: 0 6px;
+
+  .author-badge {
+    color: #fdbd00;
+  }
+}
 </style>
 
 <template>
   <SimpleContentWrapper>
-    <h1>{{ author.name }}</h1>
+    <h1 class="name">{{ author.name }}</h1>
+    <div v-if="author.badges && author.badges.length != 0">
+      <div class="author-badges">
+        <Popper 
+          content="This user is one of the first 15 contributors" 
+          arrow 
+          hover
+          placement="bottom">
+
+          <span class="author-badge material-symbols-outlined">
+            stylus
+          </span>
+        </Popper>
+      </div>
+    </div>
     <p>{{ author.biography }}</p>
     <br />
     <h4>Latest Articles From {{ author.name }}</h4>
