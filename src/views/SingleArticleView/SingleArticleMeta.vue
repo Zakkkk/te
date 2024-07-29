@@ -22,6 +22,7 @@ function getReadLengthText(length) {
 .meta-wrapper {
   margin-bottom: 10px;
   display: flex;
+  flex-wrap: wrap;
   column-gap: 5px;
   font-size: 0.95rem;
 

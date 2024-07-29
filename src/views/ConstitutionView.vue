@@ -6,6 +6,9 @@
   <SimpleContentWrapper>
     <h1>The Constitution</h1>
     <h4>The Official Code of Conduct</h4>
+
+    <p>This is the constitution. Any violations of this code will result in your post or comment being taken down and/or not being published. </p>
+
     <hr class="hr-fancy">
 
     <ol id="constitution">
@@ -20,7 +23,15 @@
       </ol>
       <li>Thoughtfulness in responding and posting</li>
       <ol>
-        Justify your responses with facts and/or reasoning and/or experience. Any unthoughtful responses will not be tolerated
+        <li>Justify your responses with facts and/or reasoning and/or experience. Any unthoughtful responses will not be tolerated</li>
+        <li>Any ad hominem, personal attacks rather than constructive discussion will not be tolerated</li>
+        <li>Acknowledge and explicitly state any biases you may have with regards to this piece. This could be used as grounds for your post being rejected</li>
+      </ol>
+      <li>Appropriate posting</li>
+      <ol>
+        <li>Label all possible trigger warnings in the submission of your piece</li>
+        <li>No gratuitous or overly sexual content is permitted</li>
+        <li>No memes nor overly jovial posts or responses are permitted</li>
       </ol>
     </ol>
 
