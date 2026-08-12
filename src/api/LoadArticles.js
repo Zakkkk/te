@@ -1,18 +1,18 @@
-import yaml from 'js-yaml';
-import axios from 'axios';
-import exists from '@/util/exists';
+import yaml from "js-yaml";
+import axios from "axios";
+import exists from "@/util/exists";
 
-import authors from '@/assets/authors.json';
+import authors from "@/assets/authors.json";
 
 async function loadArticleById(id, articleNotFound, names) {
   if (!exists(names)) {
-    const listResponse = await axios.get(`/data/articles/list.json`);
+    const listResponse = await axios.get(`/te/data/articles/list.json`);
     names = await listResponse.data.names;
   }
 
   // console.log(`names: ${names}, names.includes(${id}) = ${names.includes(id)}`)
   if (names.includes(parseInt(id))) {
-    const articleResponse = await axios.get(`/data/articles/${id}.yml`);
+    const articleResponse = await axios.get(`/te/data/articles/${id}.yml`);
 
     return yaml.load(articleResponse.data);
   } else {
@@ -20,35 +20,38 @@ async function loadArticleById(id, articleNotFound, names) {
   }
 }
 
-async function loadArticles(amount, startingIndex, names, startAtStart=false) {
+async function loadArticles(
+  amount,
+  startingIndex,
+  names,
+  startAtStart = false,
+) {
   // The startingIndex refers to the first index of the names[] variable. startingIndex of 3 does not necessarily mean the third article, just the third indexed article under the names array.
   if (!exists(names)) {
-    const listResponse = await axios.get(`/data/articles/list.json`);
+    const listResponse = await axios.get(`/te/data/articles/list.json`);
     names = await listResponse.data.names;
   }
-  
+
   const articles = [];
 
   if (!startAtStart) names = [...names].reverse(); // less efficient method but im gonna kms if i keep spending more time on this. Ill save this for future backend zak
 
-  for (
-    let i = startingIndex;
-    articles.length < amount;
-    i += 1
-  ) {
+  for (let i = startingIndex; articles.length < amount; i += 1) {
     if (i >= names.length) break;
     if (amount < articles.length) break; // do i need this?
 
-    articles.push(await loadArticleById(
-      parseInt(names[i]),
-      () => console.log(`article id (${names[i]}) not found`),
-      names
-    ));
+    articles.push(
+      await loadArticleById(
+        parseInt(names[i]),
+        () => console.log(`article id (${names[i]}) not found`),
+        names,
+      ),
+    );
   }
 
   return {
     articles: articles,
-    remaining: names.length-startingIndex-articles.length
+    remaining: names.length - startingIndex - articles.length,
   };
 }
 
@@ -57,7 +60,7 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
   // the method:
   //  lets say we need 10 articles and 2 have already been loaded. we'll load 8 and see how many match the id we need until we've either searched all the articles, or gotten the number of articles we need
 
-  const listResponse = await axios.get(`/data/articles/list.json`);
+  const listResponse = await axios.get(`/te/data/articles/list.json`);
   const names = await listResponse.data.names;
 
   const articles = [];
@@ -74,10 +77,11 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
     await loadArticles(
       amount - articles.length,
       startingIndex + numberOfArticlesEvaluated, //+ ((numberOfArticlesEvaluated != 0) ? -1 : 0), // shitty workaround i know. but basically this is kinda like the problem how the length of something is 7 but the 7th index doesnt exist. but for the very first time when we start we wanna start at 0 and not -1
-      names, startAtStart
-    ).then(response => {
-      response.articles.forEach(async article => {
-        if (article.author == id)  articles.push(article);
+      names,
+      startAtStart,
+    ).then((response) => {
+      response.articles.forEach(async (article) => {
+        if (article.author == id) articles.push(article);
         // console.log(`checked article #${article.id}: ${article.title}:`)
         numberOfArticlesEvaluated++;
         // console.log('evaluated one more')
@@ -86,33 +90,67 @@ async function loadArticlesByAuthorId(id, amount, startingIndex, startAtStart) {
       remaining = response.remaining;
     });
 
-    if (numberOfArticlesEvaluated+startingIndex >= names.length) break;
-
+    if (numberOfArticlesEvaluated + startingIndex >= names.length) break;
 
     i++;
-    if (i >= 100) { console.log('needed to break'); break; }
+    if (i >= 100) {
+      console.log("needed to break");
+      break;
+    }
   }
 
   return {
     articles: articles,
     numberOfArticlesEvaluated: numberOfArticlesEvaluated,
-    remaining: remaining // the number of articles that have yet to be evaluated
+    remaining: remaining, // the number of articles that have yet to be evaluated
   };
 }
 
 function getAuthorById(id) {
   let chosenAuthor;
 
-  authors.authors.forEach(author => {
+  authors.authors.forEach((author) => {
     if (author.id == id) chosenAuthor = author;
-  })
+  });
 
   return chosenAuthor;
+}
+
+async function loadSeries() {
+  const response = await axios.get("/te/data/series/series.json");
+  const series = await response.data.series;
+
+  return series;
+}
+
+async function findSeriesIdFromArticleId(articleId) {
+  const series = await loadSeries();
+
+  series.forEach((singularSeries) => {
+    singularSeries.articles.forEach((article) => {
+      if (article.id == articleId) return singularSeries.id;
+    });
+  });
+
+  return -1;
+}
+
+async function getSeriesById(id) {
+  const series = await loadSeries();
+
+  series.forEach((singularSeries) => {
+    if (singularSeries.id == id) return singularSeries;
+  });
+
+  return {};
 }
 
 export {
   loadArticleById,
   loadArticles,
   loadArticlesByAuthorId,
-  getAuthorById
+  getAuthorById,
+  loadSeries,
+  findSeriesIdFromArticleId,
+  getSeriesById,
 };
