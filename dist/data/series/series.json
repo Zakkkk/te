@@ -1,0 +1,16 @@
+{
+  "series": [
+    {
+      "id": 0,
+      "name": "What is? Argentina",
+      "postIds": [0],
+      "authorId": 0
+    },
+    {
+      "id": 1,
+      "name": "Download This",
+      "postIds": [1],
+      "authorId": 2
+    }
+  ]
+}
